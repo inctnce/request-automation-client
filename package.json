@@ -2,11 +2,11 @@
   "name": "request-automation-new",
   "version": "1.0.0",
   "description": "In first terminal",
-  "main": "index.js",
+  "main": "server.ts",
   "scripts": {
     "heroku-postbuild": "cd client && npm install && npm install --only-dev --no-shrinkwrap && npm run build",
-    "start": "node server.ts",
-    "dev": "ts-node server.ts",
+    "start": "serve -s build",
+    "dev": "react-scripts start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
