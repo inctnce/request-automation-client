@@ -3,11 +3,13 @@ import { CombinedState } from "redux";
 import App from ".";
 import loginAC from "../../store/actionCreators/login";
 import Action from "../../types/Action";
+import AppPage from "../../types/pages/AppPage";
 
 import LoginPage from "../../types/pages/LoginPage";
 
-function mapStateToProps(state: CombinedState<{ login: LoginPage }>) {
+function mapStateToProps(state: CombinedState<{ app: AppPage; login: LoginPage }>) {
   return {
+    isAuth: state.app.isAuth,
     email_val: state.login.email_val,
     password_val: state.login.passwpord_val,
   };

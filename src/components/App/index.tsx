@@ -1,7 +1,7 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
-import Header from "../Header";
-import Login from "../Login/container";
+import { Redirect } from "react-router-dom";
+import Content from "../Content";
+import Header from "../Header/container";
 import style from "./style.module.css";
 
 type Props = {
@@ -11,15 +11,16 @@ type Props = {
 
 function App(props: Props) {
   return (
-    <div className={style.wrapper}>
+    <>
       {props.isAuth ? (
-        <>
+        <div className={style.wrapper}>
           <Header />
-        </>
+          <Content />
+        </div>
       ) : (
-        <Login />
+        <Redirect to="/login" />
       )}
-    </div>
+    </>
   );
 }
 

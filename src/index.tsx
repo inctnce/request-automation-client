@@ -1,11 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./components/App/container";
 import reportWebVitals from "./utils/reportWebVitals";
+import "./index.css";
+
+import App from "./components/App/container";
+import Login from "./components/Login/container";
+
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import { Provider } from "react-redux";
 import store from "./store";
+
 import { ThemeProvider } from "@material-ui/core";
 import Theme from "./assets/Theme";
 
@@ -13,7 +18,12 @@ ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={Theme}>
       <Provider store={store}>
-        <App />
+        <BrowserRouter>
+          <Switch>
+            <Route path="/login" component={() => <Login />} />
+            <Route path="/" component={() => <App />} />
+          </Switch>
+        </BrowserRouter>
       </Provider>
     </ThemeProvider>
   </React.StrictMode>,

@@ -11,6 +11,13 @@ function login(state: LoginPage = iniitalState, action: Action): LoginPage {
         email_val: action.payload.key === 1 ? action.payload.value : state.email_val,
         passwpord_val: action.payload.key === 2 ? action.payload.value : state.passwpord_val,
       };
+    // case ACTION.SET_USER:
+    //   return {
+    //     ...state,
+    //     email_val: "",
+    //     passwpord_val: "",
+    //   };
+
     default:
       break;
   }

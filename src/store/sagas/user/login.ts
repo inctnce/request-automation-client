@@ -10,7 +10,7 @@ async function login(email: string, password: string) {
     password: password,
   };
 
-  return await Axios.post("/login", data)
+  return await Axios.post("/log_in", data)
     .then((response) => {
       if (response.status === 200) {
         return response.data;
@@ -25,6 +25,8 @@ async function login(email: string, password: string) {
 
 function* workerLogin(action: Action) {
   const data = yield call(login, action.payload.email, action.payload.password);
+
+  alert(data);
 
   if (data !== undefined) {
     yield put(loginAC.setUser(data));
