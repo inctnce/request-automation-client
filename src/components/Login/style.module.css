@@ -1,0 +1,15 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+
+    width: 300px;
+    max-width: 90vw;
+
+    padding: 16px;
+
+    margin-top: 15%;
+}
+
+.btn {
+    margin-top: 16px !important;
+}
