@@ -11,6 +11,11 @@ function app(state: AppPage = initialState, action: Action): AppPage {
         isAuth: true,
         user: action.payload,
       };
+    case ACTION.LOGOUT:
+      return {
+        ...state,
+        isAuth: false,
+      };
   }
   return state;
 }

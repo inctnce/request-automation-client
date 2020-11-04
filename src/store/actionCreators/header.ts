@@ -8,8 +8,15 @@ function updFilter(value: string): Action {
   };
 }
 
+function logout(): Action {
+  return {
+    type: ACTION.LOGOUT,
+  };
+}
+
 const headerAC = {
   updFilter: updFilter,
+  logout: logout,
 };
 
 export default headerAC;

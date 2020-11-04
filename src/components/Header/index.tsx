@@ -1,5 +1,4 @@
 import AppBar from "@material-ui/core/AppBar/AppBar";
-import Link from "@material-ui/core/Link";
 import Toolbar from "@material-ui/core/Toolbar";
 import React from "react";
 import style from "./style.module.css";
@@ -34,6 +33,7 @@ const useStyles = makeStyles((_theme: Theme) =>
 type Props = {
   filter_value: string;
   updFilter: (value: string) => void;
+  logout: () => void;
 };
 
 const Header = (props: Props) => {
@@ -57,7 +57,7 @@ const Header = (props: Props) => {
           <HeaderLink label="Аккаунт" url="/account" />
           <HeaderLink label="Корзина" url="/bag" />
         </span>
-        <Button color="primary" variant="contained" disableElevation>
+        <Button color="primary" variant="contained" disableElevation onClick={() => props.logout()}>
           Выйти
         </Button>
       </Toolbar>

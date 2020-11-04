@@ -26,8 +26,6 @@ async function login(email: string, password: string) {
 function* workerLogin(action: Action) {
   const data = yield call(login, action.payload.email, action.payload.password);
 
-  alert(data);
-
   if (data !== undefined) {
     yield put(loginAC.setUser(data));
   }
