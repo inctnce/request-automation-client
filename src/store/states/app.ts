@@ -5,7 +5,7 @@ import AppPage from "../../types/pages/AppPage";
 
 const app: AppPage = {
   isAuth: authLS.get(),
-  didSetUser: false,
+  didSetUser: didSetUserLS.get(),
   isAdmin: false,
   user: userLS.get(),
 };
