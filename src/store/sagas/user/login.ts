@@ -10,7 +10,7 @@ async function login(email: string, password: string) {
     password: password,
   };
 
-  return await Axios.post("/log_in", data)
+  return await Axios.post("/users/login", data)
     .then((response) => {
       if (response.status === 200) {
         return response.data;

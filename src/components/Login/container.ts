@@ -9,6 +9,7 @@ import LoginPage from "../../types/pages/LoginPage";
 
 function mapStateToProps(state: CombinedState<{ app: AppPage; login: LoginPage }>) {
   return {
+    didSetUser: state.app.didSetUser,
     isAuth: state.app.isAuth,
     email_val: state.login.email_val,
     password_val: state.login.passwpord_val,
@@ -17,6 +18,9 @@ function mapStateToProps(state: CombinedState<{ app: AppPage; login: LoginPage }
 
 function mapDispatchToProps(dispatch: (action: Action) => void) {
   return {
+    handleLoginButton: () => {
+      dispatch(loginAC.handleLoginButton());
+    },
     updForm: (key: number, value: string) => {
       dispatch(loginAC.updForm(key, value));
     },

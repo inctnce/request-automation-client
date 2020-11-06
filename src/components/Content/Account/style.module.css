@@ -1,0 +1,40 @@
+.wrapper {
+    width: 95vw;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.title {
+    grid-area: title;
+}
+
+.side {
+    width: 200px;
+    height: 120px;
+}
+
+.main {
+    margin: 0 16px;
+}
+
+ul {
+    margin: 0 8px;
+    padding: 0;
+    list-style-type: none;
+}
+
+.option {
+    padding: 16px;
+}
+
+.category_form {
+    display: flex;
+    flex-direction: column;
+
+    width: 300px;
+}
+
+.add_btn {
+    margin-top: 16px !important;
+}

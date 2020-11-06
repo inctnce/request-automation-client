@@ -7,9 +7,24 @@ import style from "./style.module.css";
 type Props = {
   isAuth: boolean;
   isAdmin: boolean;
+
+  didGetCategories: boolean;
+  getCategories: () => void;
+
+  didGetProducts: boolean;
+  getProducts: () => void;
 };
 
 function App(props: Props) {
+  if (props.isAuth) {
+    if (!props.didGetCategories) {
+      props.getCategories();
+    }
+    if (!props.didGetProducts) {
+      props.getProducts();
+    }
+  }
+
   return (
     <>
       {props.isAuth ? (

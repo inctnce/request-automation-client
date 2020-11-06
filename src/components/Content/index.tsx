@@ -1,8 +1,8 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import Account from "./Account";
+import Account from "./Account/container";
 import Bag from "./Bag";
-import Catalog from "./Catalog";
+import Catalog from "./Catalog/container";
 
 const Content = () => {
   return (

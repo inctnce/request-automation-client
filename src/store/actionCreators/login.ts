@@ -26,10 +26,17 @@ function setUser(user: User): Action {
   return { type: ACTION.SET_USER, payload: user };
 }
 
+function handleLoginButton(): Action {
+  return {
+    type: ACTION.DID_SET_USER,
+  };
+}
+
 const loginAC = {
   updForm: updForm,
   login: login,
   setUser: setUser,
+  handleLoginButton: handleLoginButton,
 };
 
 export default loginAC;
