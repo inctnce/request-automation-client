@@ -10,7 +10,7 @@ async function postCategory(creator_id: string, name: string) {
     name: name,
   };
 
-  return await Axios.post("/categories/post", data)
+  return await Axios.post("https://request-automation-api.herokuapp.com/categories/post", data)
     .then((response) => {
       if (response.status === 201) {
         return response.data;
