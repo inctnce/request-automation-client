@@ -19,19 +19,21 @@ const Catalog = (props: Props) => {
   return (
     <>
       {props.didGetCategories || props.didGetProducts ? (
-        <div className={style.wrapper}>
+        <>
           <h1 className={style.title}>Каталог</h1>
-          <Paper className={style.categories}>
-            <List>
-              {props.categories.map((category: Category) => (
-                <ListItem key={category.id} button>
-                  {category.name}
-                </ListItem>
-              ))}
-            </List>
-          </Paper>
-          <Paper className={style.products}>products</Paper>
-        </div>
+          <div className={style.wrapper}>
+            <Paper className={style.categories}>
+              <List>
+                {props.categories.map((category: Category) => (
+                  <ListItem key={category.id} button>
+                    {category.name}
+                  </ListItem>
+                ))}
+              </List>
+            </Paper>
+            <Paper className={style.products}>products</Paper>
+          </div>
+        </>
       ) : (
         <div className={style.progress_wrapper}>
           <CircularProgress />

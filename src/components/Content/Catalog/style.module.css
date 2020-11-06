@@ -1,22 +1,16 @@
 .wrapper {
   width: 95vw;
 
-  display: grid;
-
-  grid-template-areas:
-    "title title"
-    "categories products";
-
-  grid-template-columns: 200px 1fr;
-  grid-template-rows: 1fr 1fr;
+  display: flex;
+  flex-direction: row;
 }
 
 .title {
-  grid-area: title;
+  width: 95vw;
 }
 
 .categories {
-  grid-area: categories;
+  width: 200px;
   margin: 0 0 16px 0;
 }
 
