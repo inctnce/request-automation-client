@@ -32,6 +32,7 @@
     "typescript": "^4.0.5",
     "web-vitals": "^0.2.4"
   },
+  "proxy": "https://request-automation-api.herokuapp.com",
   "scripts": {
     "start": "serve -s build",
     "dev": "react-scripts start",
