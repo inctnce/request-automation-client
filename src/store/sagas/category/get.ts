@@ -4,7 +4,7 @@ import ACTION from "../../ACTION";
 import catalogAC from "../../actionCreators/catalog";
 
 async function getCategories() {
-  return await Axios.get("/categories/get")
+  return await Axios.get("https://request-automation-api.herokuapp.com/categories/get")
     .then((response) => {
       if (response.status === 200) {
         return response.data;
