@@ -14,10 +14,9 @@ type Props = {
 const CateogryForm = (props: Props) => {
   const categoryRef: React.RefObject<HTMLInputElement> = React.createRef();
   return (
-    <div className={style.option + " " + style.category_form}>
-      {/* <Paper variant="outlined" className={style.option + " " + style.category_form}> */}
+    <Paper variant="outlined" className={style.option + " " + style.category_form}>
       <Typography align="center">Добавить категорию</Typography>
-      <TextField variant="outlined" inputRef={categoryRef} label="Название" margin="normal" />
+      <TextField required inputRef={categoryRef} label="Название" margin="normal" />
       <Button
         variant="contained"
         color="primary"
@@ -27,9 +26,7 @@ const CateogryForm = (props: Props) => {
       >
         Добавить
       </Button>
-
-      {/* </Paper> */}
-    </div>
+    </Paper>
   );
 };
 

@@ -2,7 +2,7 @@ import { Paper } from "@material-ui/core";
 import List from "@material-ui/core/List/List";
 import React from "react";
 import MyListItem from "./MyListItem";
-import Option from "./Option";
+import Option from "./Option/container";
 import style from "./style.module.css";
 
 type Props = {
@@ -10,7 +10,6 @@ type Props = {
   selected_option: number;
 
   setOption: (selected_option: number) => void;
-  postCategory: (user_id: string, name: string) => void;
 };
 
 const Account = (props: Props) => {
@@ -38,11 +37,7 @@ const Account = (props: Props) => {
           </List>
         </Paper>
         <div className={style.main}>
-          <Option
-            user_id={props.user_id}
-            selected_option={props.selected_option}
-            postCategory={props.postCategory}
-          />
+          <Option />
         </div>
       </div>
     </div>

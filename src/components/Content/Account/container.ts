@@ -19,9 +19,6 @@ function mapDispatchToProps(dispatch: (action: Action) => void) {
     setOption: (selected_option: number) => {
       dispatch(accountAC.setOption(selected_option));
     },
-    postCategory: (user_id: string, name: string) => {
-      dispatch(catalogAC.postCategory(user_id, name));
-    },
   };
 }
 

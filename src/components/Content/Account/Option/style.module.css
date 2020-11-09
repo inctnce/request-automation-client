@@ -1,0 +1,22 @@
+.option {
+  padding: 16px;
+}
+
+.category_form {
+  display: flex;
+  flex-direction: column;
+
+  width: 320px;
+}
+
+.form_item {
+  margin-top: 16px !important;
+}
+
+/* .table_btn {
+  margin-top: 8px !important;
+} */
+
+.add_btn {
+  margin-top: 24px !important;
+}
