@@ -5,7 +5,6 @@ import SearchIcon from "@material-ui/icons/Search";
 
 import React from "react";
 
-
 type Props = {
   className?: string;
   value: string;
@@ -17,7 +16,8 @@ type Props = {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     search: {
-      width: 200,
+      minWidth: 200,
+      maxWidth: 400,
       height: 36,
       borderRadius: 8,
       backgroundColor: "var(--light_level_2)",
@@ -42,7 +42,7 @@ const Search = (props: Props) => {
   const search_ref: React.RefObject<HTMLInputElement> = React.createRef();
 
   return (
-    <div className={classes.search}>
+    <div className={classes.search + " " + props.className}>
       <div className={classes.searchIcon}>
         <SearchIcon color="action" />
       </div>

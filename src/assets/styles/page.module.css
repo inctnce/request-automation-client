@@ -5,12 +5,22 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    align-items: stretch;
+  }
+
+  .side_wrapper {
+    width: inherit;
+    margin-bottom: 16px;
   }
 
   .side {
-    width: inherit;
-    height: 120px;
-    margin-bottom: 16px;
+    flex: 1;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    height: auto;
   }
 
   .main {
@@ -28,9 +38,13 @@
   }
 
   .side {
-    width: 200px;
-    height: 120px;
-    margin-bottom: 16px;
+    flex: 1;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    height: auto;
   }
 
   .main {

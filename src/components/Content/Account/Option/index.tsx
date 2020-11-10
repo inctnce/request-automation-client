@@ -1,9 +1,10 @@
 import React from "react";
-import style from "./style.module.css";
+import style from "../../../../assets/styles/page.module.css";
 
-import CateogryForm from "./CategoryForm";
+import CategoryForm from "./CategoryForm";
 import ProductForm from "./ProductForm";
 import Category from "../../../../types/Category";
+import Specification from "../../../../types/Specification";
 
 type Props = {
   user_id: string;
@@ -12,15 +13,19 @@ type Props = {
   selected_category: Category;
   categories: Category[];
   product_name: string;
-  specs: string[];
-  vals: string[];
+  num_of_rows: number;
+  specs: Specification[];
   product_price: string;
   extra_info: string;
 
   postCategory: (user_id: string, name: string) => void;
 
-  setCategory: (category: Category) => void;
-  updForm: (isTable: boolean, key: number, value: string) => void;
+  updNumOfRows: (action: "increase" | "decrease") => void;
+  updProductForm: (
+    segment: "category" | "table" | "other",
+    key: number,
+    value: string | Category
+  ) => void;
 };
 
 const Option = (props: Props) => {
@@ -28,7 +33,9 @@ const Option = (props: Props) => {
     return <div className={style.option}>История</div>;
   }
   if (props.selected_option === 1) {
-    return <CateogryForm user_id={props.user_id} postCategory={props.postCategory} />;
+    return (
+      <CategoryForm user_id={props.user_id} postCategory={props.postCategory} />
+    );
   }
   if (props.selected_option === 2) {
     return (
@@ -37,11 +44,10 @@ const Option = (props: Props) => {
         categories={props.categories}
         name={props.product_name}
         specs={props.specs}
-        values={props.vals}
         price={props.product_price}
         extra_info={props.extra_info}
-        setCategory={props.setCategory}
-        updForm={props.updForm}
+        updNumOfRows={props.updNumOfRows}
+        updForm={props.updProductForm}
       />
     );
   }

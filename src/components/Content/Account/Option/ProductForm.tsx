@@ -17,29 +17,38 @@ import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import Add from "@material-ui/icons/Add";
 import Remove from "@material-ui/icons/Remove";
+import Specification from "../../../../types/Specification";
 
 type Props = {
   selected_category: Category;
   categories: Category[];
 
   name: string;
-  specs: string[];
-  values: string[];
+  specs: Specification[];
   price: string;
   extra_info: string;
 
-  setCategory: (category: Category) => void;
-  updForm: (isTable: boolean, key: number, value: string) => void;
+  updNumOfRows: (action: "increase" | "decrease") => void;
+  updForm: (
+    segment: "category" | "table" | "other",
+    key: number,
+    value: string | Category
+  ) => void;
 };
 
 const ProductForm = (props: Props) => {
-  const [category, setCategory] = React.useState(props.categories[0].name || "");
+  const [category, setCategory] = React.useState(
+    props.categories[0].name || ""
+  );
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCategory(event.target.value);
   };
   return (
-    <Paper className={style.option + " " + style.category_form} variant="outlined">
+    <Paper
+      className={style.option + " " + style.category_form}
+      variant="outlined"
+    >
       <Typography className={style.form_item} align="center">
         Добавить товар
       </Typography>
@@ -70,32 +79,49 @@ const ProductForm = (props: Props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            <TableRow>
-              <TableCell>
-                <InputBase placeholder="характеристика" />
-              </TableCell>
-              <TableCell>
-                <InputBase placeholder="значение" />
-              </TableCell>
-            </TableRow>
+            {props.specs.map((spec: Specification) => (
+              <TableRow>
+                <TableCell>
+                  <InputBase placeholder="характеристика" />
+                </TableCell>
+                <TableCell>
+                  <InputBase placeholder="значение" />
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </Paper>
 
       <div className={style.table_btn}>
-        <IconButton color="primary">
+        <IconButton
+          color="primary"
+          onClick={() => props.updNumOfRows("increase")}
+        >
           <Add />
         </IconButton>
-        <IconButton color="primary">
+        <IconButton
+          color="primary"
+          onClick={() => props.updNumOfRows("decrease")}
+        >
           <Remove />
         </IconButton>
       </div>
 
       <TextField className={style.form_item} required label="Цена" />
 
-      <TextField label="Дополнительная информация" multiline />
+      <TextField
+        className={style.form_item}
+        label="Дополнительная информация"
+        multiline
+      />
 
-      <Button variant="contained" color="primary" className={style.add_btn}>
+      <Button
+        variant="contained"
+        color="primary"
+        className={style.form_item}
+        disableElevation
+      >
         Добавить
       </Button>
     </Paper>

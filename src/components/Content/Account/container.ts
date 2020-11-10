@@ -11,6 +11,8 @@ function mapStateToProps(state: CombinedState<{ app: AppPage; account: AccountPa
   return {
     user_id: state.app.user!.id,
     selected_option: state.account.selected_option,
+
+    
   };
 }
 

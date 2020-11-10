@@ -1,11 +1,11 @@
-import { CircularProgress } from "@material-ui/core";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Paper from "@material-ui/core/Paper";
 import React from "react";
 import Category from "../../../types/Category";
 import Product from "../../../types/Product";
-import style from "./style.module.css";
+import style from "../../../assets/styles/page.module.css";
 
 type Props = {
   didGetCategories: boolean;
@@ -17,21 +17,23 @@ type Props = {
 
 const Catalog = (props: Props) => {
   return (
-    <>
+    <div className={style.wrapper}>
       {props.didGetCategories || props.didGetProducts ? (
         <>
           <h1 className={style.title}>Каталог</h1>
           <div className={style.wrapper}>
-            <Paper className={style.categories}>
-              <List>
-                {props.categories.map((category: Category) => (
-                  <ListItem key={category.id} button>
-                    {category.name}
-                  </ListItem>
-                ))}
-              </List>
-            </Paper>
-            <Paper className={style.products}>products</Paper>
+            <div className={style.side_wrapper}>
+              <Paper className={style.side}>
+                <List>
+                  {props.categories.map((category: Category) => (
+                    <ListItem key={category.id} button>
+                      {category.name}
+                    </ListItem>
+                  ))}
+                </List>
+              </Paper>
+            </div>
+            <Paper className={style.main}>products</Paper>
           </div>
         </>
       ) : (
@@ -39,7 +41,7 @@ const Catalog = (props: Props) => {
           <CircularProgress />
         </div>
       )}
-    </>
+    </div>
   );
 };
 

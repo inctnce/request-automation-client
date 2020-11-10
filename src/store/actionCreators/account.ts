@@ -1,4 +1,5 @@
 import Action from "../../types/Action";
+import Category from "../../types/Category";
 import ACTION from "../ACTION";
 
 function setOption(selected_option: number): Action {
@@ -8,8 +9,32 @@ function setOption(selected_option: number): Action {
   };
 }
 
+function updProductForm(
+  segment: "category" | "table" | "other",
+  key: number,
+  value: string | Category
+): Action {
+  return {
+    type: ACTION.UPD_PRODUCT_FORM,
+    payload: {
+      segment: segment,
+      key: key,
+      value: value,
+    },
+  };
+}
+
+function updNumOfRows(action: "increase" | "decrease"): Action {
+  return {
+    type: ACTION.UPD_NUM_OF_ROWS,
+    payload: action,
+  };
+}
+
 const accountAC = {
   setOption: setOption,
+  updNumOfRows: updNumOfRows,
+  updProductForm: updProductForm,
 };
 
 export default accountAC;

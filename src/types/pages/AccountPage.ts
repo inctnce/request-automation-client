@@ -1,10 +1,11 @@
 import Category from "../Category";
+import Specification from "../Specification";
 
 type ProductForm = {
   selected_category?: Category;
   name: string;
-  specs: string[];
-  vals: string[];
+  num_of_rows: number;
+  specs: Specification[];
   price: string;
   extra_info: string;
 };
