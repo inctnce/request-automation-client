@@ -29,8 +29,10 @@ type Props = {
   extra_info: string;
 
   updNumOfRows: (action: "increase" | "decrease") => void;
+
+  updTable: (type: "spec" | "value", index: number, value: string) => void;
   updForm: (
-    segment: "category" | "table" | "other",
+    segment: "category" | "other",
     key: number,
     value: string | Category
   ) => void;
@@ -44,6 +46,51 @@ const ProductForm = (props: Props) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCategory(event.target.value);
   };
+
+  const nameRef: React.RefObject<HTMLInputElement> = React.createRef();
+  const priceRef: React.RefObject<HTMLInputElement> = React.createRef();
+  const extraInfoRef: React.RefObject<HTMLInputElement> = React.createRef();
+  const specRefs: React.RefObject<HTMLInputElement>[] = [];
+  const valueRefs: React.RefObject<HTMLInputElement>[] = [];
+
+  function createSpecsTable() {
+    const result = [];
+
+    for (let i = 0; i < props.specs.length; i++) {
+      const specRef: React.RefObject<HTMLInputElement> = React.createRef();
+      const valueRef: React.RefObject<HTMLInputElement> = React.createRef();
+      specRefs.push(specRef);
+      valueRefs.push(valueRef);
+      result.push(
+        <TableRow key={i}>
+          <TableCell>
+            <InputBase
+              placeholder="характеристика"
+              value={props.specs[i].spec}
+              inputRef={specRefs[i]}
+              onChange={() =>
+                props.updTable("spec", i, specRefs[i].current!.value)
+              }
+            />
+          </TableCell>
+          <TableCell>
+            <InputBase
+              placeholder="значение"
+              value={props.specs[i].value}
+              inputRef={valueRefs[i]}
+              onChange={() =>
+                props.updTable("value", i, valueRefs[i].current!.value)
+              }
+            />
+          </TableCell>
+        </TableRow>
+      );
+    }
+    return result;
+  }
+
+  const table_component = createSpecsTable();
+
   return (
     <Paper
       className={style.option + " " + style.category_form}
@@ -61,14 +108,20 @@ const ProductForm = (props: Props) => {
         value={category}
         onChange={handleChange}
       >
-        {props.categories.map((category: Category) => (
-          <MenuItem key={category.id} value={category.name}>
+        {props.categories.map((category: Category, index: number) => (
+          <MenuItem key={index} value={category.name}>
             {category.name}
           </MenuItem>
         ))}
       </TextField>
 
-      <TextField className={style.form_item} required label="Название" />
+      <TextField
+        className={style.form_item}
+        required
+        label="Название"
+        inputRef={nameRef}
+        onChange={() => props.updForm("other", 0, nameRef.current!.value)}
+      />
 
       <Paper variant="outlined" className={style.form_item}>
         <Table>
@@ -78,18 +131,7 @@ const ProductForm = (props: Props) => {
               <TableCell>Значения</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
-            {props.specs.map((spec: Specification) => (
-              <TableRow>
-                <TableCell>
-                  <InputBase placeholder="характеристика" />
-                </TableCell>
-                <TableCell>
-                  <InputBase placeholder="значение" />
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
+          <TableBody>{table_component}</TableBody>
         </Table>
       </Paper>
 
@@ -108,12 +150,20 @@ const ProductForm = (props: Props) => {
         </IconButton>
       </div>
 
-      <TextField className={style.form_item} required label="Цена" />
+      <TextField
+        className={style.form_item}
+        required
+        label="Цена"
+        inputRef={priceRef}
+        onClick={() => props.updForm("other", 1, priceRef.current!.value)}
+      />
 
       <TextField
         className={style.form_item}
         label="Дополнительная информация"
         multiline
+        inputRef={extraInfoRef}
+        onClick={() => props.updForm("other", 2, extraInfoRef.current!.value)}
       />
 
       <Button

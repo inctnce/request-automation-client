@@ -43,6 +43,15 @@ function mapDispatchToProps(dispatch: (action: Action) => void) {
     ) => {
       dispatch(accountAC.updProductForm(segment, key, value));
     },
+
+    updProductFormTable: (
+      type: "spec" | "value",
+      index: number,
+      value: string
+    ) => {
+      dispatch(accountAC.updProductFormTable(type, index, value));
+    },
+
     updNumOfRows: (action: "increase" | "decrease") => {
       dispatch(accountAC.updNumOfRows(action));
     },

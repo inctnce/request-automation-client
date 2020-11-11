@@ -21,8 +21,13 @@ type Props = {
   postCategory: (user_id: string, name: string) => void;
 
   updNumOfRows: (action: "increase" | "decrease") => void;
+  updProductFormTable: (
+    type: "spec" | "value",
+    index: number,
+    value: string
+  ) => void;
   updProductForm: (
-    segment: "category" | "table" | "other",
+    segment: "category" | "other",
     key: number,
     value: string | Category
   ) => void;
@@ -47,6 +52,7 @@ const Option = (props: Props) => {
         price={props.product_price}
         extra_info={props.extra_info}
         updNumOfRows={props.updNumOfRows}
+        updTable={props.updProductFormTable}
         updForm={props.updProductForm}
       />
     );
