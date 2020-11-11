@@ -3,7 +3,10 @@ import ACTION from "../ACTION";
 import CatalogPage from "../../types/pages/CatalogPage";
 import Action from "../../types/Action";
 
-function catalog(state: CatalogPage = initialState, action: Action): CatalogPage {
+function catalog(
+  state: CatalogPage = initialState,
+  action: Action
+): CatalogPage {
   switch (action.type) {
     case ACTION.SET_CATEGORY:
       return {
@@ -15,6 +18,11 @@ function catalog(state: CatalogPage = initialState, action: Action): CatalogPage
         ...state,
         didGetCategories: true,
         categories: [...action.payload],
+      };
+    case ACTION.SET_PRODUCT:
+      return {
+        ...state,
+        products: [...state.products, action.payload],
       };
   }
 

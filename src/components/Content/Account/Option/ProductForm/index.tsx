@@ -2,8 +2,8 @@ import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
-import Category from "../../../../types/Category";
-import style from "./style.module.css";
+import Category from "../../../../../types/Category";
+import style from "../style.module.css";
 import Button from "@material-ui/core/Button";
 import MenuItem from "@material-ui/core/MenuItem";
 
@@ -17,9 +17,12 @@ import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import Add from "@material-ui/icons/Add";
 import Remove from "@material-ui/icons/Remove";
-import Specification from "../../../../types/Specification";
+import Specification from "../../../../../types/Specification";
+import { parseSpecs } from "./helpers";
 
 type Props = {
+  creator_id: string;
+
   selected_category: Category;
   categories: Category[];
 
@@ -36,6 +39,16 @@ type Props = {
     key: number,
     value: string | Category
   ) => void;
+
+  postProduct: (
+    name: string,
+    specs: string[],
+    values: string[],
+    price: string,
+    extra_info: string,
+    creator_id: string,
+    category_id: string
+  ) => void;
 };
 
 const ProductForm = (props: Props) => {
@@ -45,6 +58,14 @@ const ProductForm = (props: Props) => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCategory(event.target.value);
+
+    const category: Category | undefined = props.categories.find(
+      (currentValue: Category) => {
+        return currentValue.name === event.target.value;
+      }
+    );
+
+    props.updForm("category", 0, category!);
   };
 
   const nameRef: React.RefObject<HTMLInputElement> = React.createRef();
@@ -120,6 +141,7 @@ const ProductForm = (props: Props) => {
         required
         label="Название"
         inputRef={nameRef}
+        value={props.name}
         onChange={() => props.updForm("other", 0, nameRef.current!.value)}
       />
 
@@ -155,7 +177,8 @@ const ProductForm = (props: Props) => {
         required
         label="Цена"
         inputRef={priceRef}
-        onClick={() => props.updForm("other", 1, priceRef.current!.value)}
+        value={props.price}
+        onChange={() => props.updForm("other", 1, priceRef.current!.value)}
       />
 
       <TextField
@@ -163,6 +186,7 @@ const ProductForm = (props: Props) => {
         label="Дополнительная информация"
         multiline
         inputRef={extraInfoRef}
+        value={props.extra_info}
         onClick={() => props.updForm("other", 2, extraInfoRef.current!.value)}
       />
 
@@ -171,6 +195,17 @@ const ProductForm = (props: Props) => {
         color="primary"
         className={style.form_item}
         disableElevation
+        onClick={() =>
+          props.postProduct(
+            props.name,
+            parseSpecs("specs", props.specs),
+            parseSpecs("values", props.specs),
+            props.price,
+            props.extra_info,
+            props.creator_id,
+            props.selected_category.id
+          )
+        }
       >
         Добавить
       </Button>

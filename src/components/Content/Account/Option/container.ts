@@ -1,10 +1,8 @@
 import { connect } from "react-redux";
 import { CombinedState } from "redux";
 import Catalog from ".";
-import accountAC from "../../../../store/actionCreators/account";
 import catalogAC from "../../../../store/actionCreators/catalog";
 import Action from "../../../../types/Action";
-import Category from "../../../../types/Category";
 import AccountPage from "../../../../types/pages/AccountPage";
 import AppPage from "../../../../types/pages/AppPage";
 import CatalogPage from "../../../../types/pages/CatalogPage";
@@ -35,25 +33,6 @@ function mapDispatchToProps(dispatch: (action: Action) => void) {
   return {
     postCategory: (user_id: string, name: string) => {
       dispatch(catalogAC.postCategory(user_id, name));
-    },
-    updProductForm: (
-      segment: "category" | "table" | "other",
-      key: number,
-      value: string | Category
-    ) => {
-      dispatch(accountAC.updProductForm(segment, key, value));
-    },
-
-    updProductFormTable: (
-      type: "spec" | "value",
-      index: number,
-      value: string
-    ) => {
-      dispatch(accountAC.updProductFormTable(type, index, value));
-    },
-
-    updNumOfRows: (action: "increase" | "decrease") => {
-      dispatch(accountAC.updNumOfRows(action));
     },
   };
 }

@@ -2,7 +2,6 @@ import { connect } from "react-redux";
 import { CombinedState } from "redux";
 import Account from ".";
 import accountAC from "../../../store/actionCreators/account";
-import catalogAC from "../../../store/actionCreators/catalog";
 import Action from "../../../types/Action";
 import AccountPage from "../../../types/pages/AccountPage";
 import AppPage from "../../../types/pages/AppPage";
