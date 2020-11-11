@@ -24,7 +24,7 @@ function* workerGetProducts() {
 
   if (data !== undefined) {
     console.log(data);
-    yield put(catalogAC.setCategories(data));
+    yield put(catalogAC.setProducts(data));
   }
 }
 
