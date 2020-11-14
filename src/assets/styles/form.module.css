@@ -1,0 +1,51 @@
+.option {
+  margin-right: 16px;
+  margin-bottom: 16px;
+
+  flex: 1 1 auto;
+  overflow-y: auto;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 400px;
+}
+
+.form {
+  margin-left: 8px;
+  margin-bottom: 8px;
+
+  flex: 1;
+
+  min-width: 300px;
+  width: 300px;
+  max-width: 300px;
+  height: auto;
+}
+
+.form_item {
+  margin: 16px !important;
+}
+
+.card_btn {
+  margin: 16px !important;
+  max-width: 120px !important;
+}
+
+.table_btn {
+  margin-left: 16px !important;
+}
+
+@media screen and (max-width: 500px) {
+  .form {
+    margin-left: 0px;
+    margin-bottom: 16px;
+    width: 95vw;
+    max-width: 95vw;
+  }
+
+  .option {
+    margin-bottom: 16px;
+    width: 95vw;
+  }
+}

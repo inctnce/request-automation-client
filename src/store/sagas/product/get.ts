@@ -23,7 +23,11 @@ function* workerGetProducts() {
   const data = yield call(getProducts);
 
   if (data !== undefined) {
-    console.log(data);
+    for (let i = 0; i < data.length; i++) {
+      data[i].specs = data[i].specs.split(",").map(String);
+      data[i].values = data[i].values.split(",").map(String);
+    }
+
     yield put(catalogAC.setProducts(data));
   }
 }

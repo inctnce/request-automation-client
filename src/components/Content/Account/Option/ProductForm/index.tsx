@@ -3,7 +3,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
 import Category from "../../../../../types/Category";
-import style from "../style.module.css";
+import style from "../../../../../assets/styles/form.module.css";
 import Button from "@material-ui/core/Button";
 import MenuItem from "@material-ui/core/MenuItem";
 
@@ -113,10 +113,7 @@ const ProductForm = (props: Props) => {
   const table_component = createSpecsTable();
 
   return (
-    <Paper
-      className={style.option + " " + style.category_form}
-      variant="outlined"
-    >
+    <Paper className={style.option} variant="outlined">
       <Typography className={style.form_item} align="center">
         Добавить товар
       </Typography>

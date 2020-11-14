@@ -12,7 +12,7 @@ function mapStateToProps(state: CombinedState<{ app: AppPage; login: LoginPage }
     didSetUser: state.app.didSetUser,
     isAuth: state.app.isAuth,
     email_val: state.login.email_val,
-    password_val: state.login.passwpord_val,
+    password_val: state.login.password_val,
   };
 }
 

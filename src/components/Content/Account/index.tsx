@@ -6,7 +6,6 @@ import Option from "./Option/container";
 import style from "../../../assets/styles/page.module.css";
 
 type Props = {
-  user_id: string;
   selected_option: number;
 
   setOption: (selected_option: number) => void;

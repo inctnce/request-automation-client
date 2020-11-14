@@ -1,0 +1,26 @@
+.option {
+  margin-right: 16px;
+  margin-bottom: 16px;
+
+  flex: 1 1 auto;
+  overflow-y: auto;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 400px;
+}
+
+@media screen and (max-width: 500px) {
+  .form {
+    margin-left: 0px;
+    margin-bottom: 16px;
+    width: 95vw;
+    max-width: 95vw;
+  }
+
+  .option {
+    margin-bottom: 16px;
+    width: 95vw;
+  }
+}

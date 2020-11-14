@@ -6,6 +6,7 @@ import React from "react";
 import Category from "../../../types/Category";
 import Product from "../../../types/Product";
 import style from "../../../assets/styles/page.module.css";
+import ProductCard from "./ProductCard";
 
 type Props = {
   didGetCategories: boolean;
@@ -16,6 +17,10 @@ type Props = {
 };
 
 const Catalog = (props: Props) => {
+  const products_component = props.products.map((product: Product) => (
+    <ProductCard product={product} />
+  ));
+
   return (
     <div className={style.wrapper}>
       {props.didGetCategories || props.didGetProducts ? (
@@ -33,7 +38,7 @@ const Catalog = (props: Props) => {
                 </List>
               </Paper>
             </div>
-            <Paper className={style.main}>products</Paper>
+            <div className={style.main}>{products_component}</div>
           </div>
         </>
       ) : (

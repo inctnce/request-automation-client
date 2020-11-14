@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { CombinedState } from "redux";
-import Catalog from ".";
+import Option from ".";
 import catalogAC from "../../../../store/actionCreators/catalog";
 import Action from "../../../../types/Action";
 import AccountPage from "../../../../types/pages/AccountPage";
@@ -30,13 +30,9 @@ function mapStateToProps(
 }
 
 function mapDispatchToProps(dispatch: (action: Action) => void) {
-  return {
-    postCategory: (user_id: string, name: string) => {
-      dispatch(catalogAC.postCategory(user_id, name));
-    },
-  };
+  return {};
 }
 
-const CatalogContainer = connect(mapStateToProps, mapDispatchToProps)(Catalog);
+const OptionContainer = connect(mapStateToProps, mapDispatchToProps)(Option);
 
-export default CatalogContainer;
+export default OptionContainer;

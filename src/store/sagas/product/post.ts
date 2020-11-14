@@ -15,8 +15,8 @@ async function postCategory(
 ) {
   const data = {
     name: name,
-    specs: specs,
-    values: values,
+    specs: specs.join(),
+    values: values.join(),
     price: price,
     extra_info: extra_info,
     creator_id: creator_id,

@@ -18,6 +18,10 @@
 
 .main {
   margin: 0 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .progress_wrapper {
@@ -30,14 +34,17 @@
   justify-content: center;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 500px) {
   .side_wrapper {
     width: inherit;
     margin-bottom: 16px;
   }
 
   .main {
+    width: inherit;
     margin-left: 0px;
     margin-bottom: 16px;
+
+    flex-direction: column;
   }
 }

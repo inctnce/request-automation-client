@@ -14,3 +14,9 @@
 .table_btn {
   margin-left: 16px !important;
 }
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+

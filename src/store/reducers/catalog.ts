@@ -19,6 +19,12 @@ function catalog(
         didGetCategories: true,
         categories: [...action.payload],
       };
+    case ACTION.SET_PRODUCTS:
+      return {
+        ...state,
+        didGetProducts: true,
+        products: [...action.payload],
+      };
     case ACTION.SET_PRODUCT:
       return {
         ...state,
