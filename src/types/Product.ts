@@ -1,5 +1,5 @@
 type Product = {
-  id: string;
+  id?: string;
   name: string;
   specs: string[];
   values: string[];
@@ -7,7 +7,7 @@ type Product = {
   extra_info: string;
   category_id: string;
   creator_id: string;
-  creation_date: Date;
+  creation_date?: Date;
 };
 
 export default Product;

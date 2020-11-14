@@ -1,7 +1,7 @@
 type Category = {
-  id: string;
+  id?: string;
   name: string;
   creator_id: string;
-  creation_date: Date;
+  creation_date?: Date;
 };
 export default Category;
