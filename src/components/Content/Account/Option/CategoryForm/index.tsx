@@ -5,6 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import postCategory from "./helpers";
 
 type Props = {
   user_id: string;
@@ -13,6 +14,7 @@ type Props = {
 
 const CategoryForm = (props: Props) => {
   const categoryRef: React.RefObject<HTMLInputElement> = React.createRef();
+
   return (
     <Paper variant="outlined" className={style.form}>
       <Typography
@@ -35,7 +37,11 @@ const CategoryForm = (props: Props) => {
         color="primary"
         disableElevation
         onClick={() =>
-          props.postCategory(props.user_id, categoryRef.current!.value)
+          postCategory(
+            props.user_id,
+            categoryRef.current!.value,
+            props.postCategory
+          )
         }
       >
         Добавить

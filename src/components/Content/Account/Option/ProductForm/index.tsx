@@ -18,7 +18,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Add from "@material-ui/icons/Add";
 import Remove from "@material-ui/icons/Remove";
 import Specification from "../../../../../types/Specification";
-import { parseSpecs } from "./helpers";
+import postProduct, { parseSpecs } from "./helpers";
 
 type Props = {
   creator_id: string;
@@ -193,14 +193,15 @@ const ProductForm = (props: Props) => {
         className={style.form_item}
         disableElevation
         onClick={() =>
-          props.postProduct(
+          postProduct(
             props.name,
             parseSpecs("specs", props.specs),
             parseSpecs("values", props.specs),
             props.price,
             props.extra_info,
             props.creator_id,
-            props.selected_category.id
+            props.selected_category.id,
+            props.postProduct
           )
         }
       >

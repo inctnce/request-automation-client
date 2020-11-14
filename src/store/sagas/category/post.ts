@@ -1,6 +1,7 @@
 import Axios from "axios";
 import { call, put, takeEvery } from "redux-saga/effects";
 import Action from "../../../types/Action";
+import Category from "../../../types/Category";
 import ACTION from "../../ACTION";
 import catalogAC from "../../actionCreators/catalog";
 
@@ -10,7 +11,10 @@ async function postCategory(creator_id: string, name: string) {
     name: name,
   };
 
-  return await Axios.post("https://request-automation-api.herokuapp.com/categories/post", data)
+  return await Axios.post(
+    "https://request-automation-api.herokuapp.com/categories/post",
+    data
+  )
     .then((response) => {
       if (response.status === 201) {
         return response.data;
@@ -20,11 +24,16 @@ async function postCategory(creator_id: string, name: string) {
     })
     .catch((err) => {
       alert(err.response.data);
+      return err.response.data;
     });
 }
 
 function* workerPostCategory(action: Action) {
-  const data = yield call(postCategory, action.payload.creator_id, action.payload.name);
+  const data = yield call(
+    postCategory,
+    action.payload.creator_id,
+    action.payload.name
+  );
 
   if (data !== undefined) {
     console.log(data);
