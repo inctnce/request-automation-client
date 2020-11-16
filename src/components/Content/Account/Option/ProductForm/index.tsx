@@ -3,7 +3,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
 import Category from "../../../../../types/Category";
-import style from "../../../../../assets/styles/form.module.css";
+import style from "./style.module.css";
 import Button from "@material-ui/core/Button";
 import MenuItem from "@material-ui/core/MenuItem";
 
@@ -55,6 +55,10 @@ const ProductForm = (props: Props) => {
   const [category, setCategory] = React.useState(
     props.categories[0].name || ""
   );
+
+  React.useEffect(() => {
+    props.updForm("category", 0, props.categories[0]);
+  }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCategory(event.target.value);
@@ -113,7 +117,7 @@ const ProductForm = (props: Props) => {
   const table_component = createSpecsTable();
 
   return (
-    <Paper className={style.option} variant="outlined">
+    <Paper className={style.form} variant="outlined">
       <Typography className={style.form_item} align="center">
         Добавить товар
       </Typography>
@@ -173,18 +177,18 @@ const ProductForm = (props: Props) => {
         className={style.form_item}
         required
         label="Дополнительная информация"
-        inputRef={priceRef}
+        inputRef={extraInfoRef}
         value={props.price}
-        onChange={() => props.updForm("other", 1, priceRef.current!.value)}
+        onChange={() => props.updForm("other", 1, extraInfoRef.current!.value)}
       />
 
       <TextField
         className={style.form_item}
         required
         label="Цена"
-        inputRef={extraInfoRef}
+        inputRef={priceRef}
         value={props.extra_info}
-        onChange={() => props.updForm("other", 2, extraInfoRef.current!.value)}
+        onChange={() => props.updForm("other", 2, priceRef.current!.value)}
       />
 
       <Button
