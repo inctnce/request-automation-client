@@ -11,10 +11,10 @@ import style from "./style.module.css";
 import Category from "../../../../../types/Category";
 
 type Props = {
-  categories: Category[];
+  items: any;
 };
 
-const CategoryHistory = (props: Props) => {
+const History = (props: Props) => {
   return (
     <Paper variant="outlined" className={style.option}>
       <Table>
@@ -26,7 +26,7 @@ const CategoryHistory = (props: Props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.categories.map((category: Category) => (
+          {props.items.map((category: Category) => (
             <TableRow key={category.id}>
               <TableCell>{category.name}</TableCell>
               <TableCell>{category.creation_date}</TableCell>
@@ -43,4 +43,4 @@ const CategoryHistory = (props: Props) => {
   );
 };
 
-export default CategoryHistory;
+export default History;

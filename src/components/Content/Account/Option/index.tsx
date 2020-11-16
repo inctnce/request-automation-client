@@ -2,11 +2,17 @@ import React from "react";
 import style from "./style.module.css";
 
 import CategoryForm from "./CategoryForm/container";
-import CategoryHistory from "./CategoryHistory/container";
+import History from "./History";
 import ProductForm from "./ProductForm/container";
+import Category from "../../../../types/Category";
+import Product from "../../../../types/Product";
 
 type Props = {
   selected_option: number;
+
+  creator_id: string;
+  categories: Category[];
+  products: Product[];
 };
 
 const Option = (props: Props) => {
@@ -17,12 +23,25 @@ const Option = (props: Props) => {
     return (
       <div className={style.wrapper}>
         <CategoryForm />
-        <CategoryHistory />
+        <History
+          items={props.categories.filter((currentValue) => {
+            return currentValue.creator_id === props.creator_id;
+          })}
+        />
       </div>
     );
   }
   if (props.selected_option === 2) {
-    return <ProductForm />;
+    return (
+      <div className={style.wrapper}>
+        <ProductForm />
+        <History
+          items={props.products.filter((currentValue) => {
+            return currentValue.creator_id === props.creator_id;
+          })}
+        />
+      </div>
+    );
   }
   return <></>;
 };

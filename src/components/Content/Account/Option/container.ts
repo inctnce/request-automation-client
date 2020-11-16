@@ -1,7 +1,6 @@
 import { connect } from "react-redux";
 import { CombinedState } from "redux";
 import Option from ".";
-import catalogAC from "../../../../store/actionCreators/catalog";
 import Action from "../../../../types/Action";
 import AccountPage from "../../../../types/pages/AccountPage";
 import AppPage from "../../../../types/pages/AppPage";
@@ -15,16 +14,15 @@ function mapStateToProps(
   }>
 ) {
   return {
-    user_id: state.app.user!.id,
     selected_option: state.account.selected_option,
 
-    selected_category: state.account.product_form?.selected_category!,
-    categories: state.catalog.categories,
-
-    product_name: state.account.product_form.name,
-    specs: state.account.product_form.specs,
-    product_price: state.account.product_form.price,
-    extra_info: state.account.product_form.extra_info,
+    creator_id: state.app.user!.id,
+    categories: state.catalog.categories.filter((currentValue) => {
+      return currentValue.creator_id === state.app.user?.id;
+    }),
+    products: state.catalog.products.filter((currentValue) => {
+      return currentValue.creator_id === state.app.user?.id;
+    }),
   };
 }
 
