@@ -15,18 +15,20 @@ function account(
         selected_option: action.payload,
       };
     case ACTION.UPD_NUM_OF_ROWS:
-      if (action.payload === "increase") {
-        state.product_form.num_of_rows++;
-        state.product_form.specs.push({ spec: "", value: "" });
-      } else {
-        if (state.product_form.num_of_rows > 1) {
-          state.product_form.num_of_rows--;
-          state.product_form.specs.pop();
-        }
-      }
-
       return {
         ...state,
+        product_form: {
+          ...state.product_form,
+          specs:
+            action.payload === "increase"
+              ? [...state.product_form.specs, { spec: "", value: "" }]
+              : [
+                  ...state.product_form.specs.splice(
+                    state.product_form.specs.length - 1,
+                    1
+                  ),
+                ],
+        },
       };
     case ACTION.UPD_PRODUCT_FORM:
       return {

@@ -4,9 +4,9 @@ export default function postDemand(
   demand: Demand,
   post: (demand: Demand) => void
 ) {
-  if (demand.name.trim() === "" || name === undefined) {
-    return "error";
-  }
+  // if (demand.name.trim() === "" || name === undefined) {
+  //   return "error";
+  // }
   if (demand.products.length === 0) {
     return "error";
   }

@@ -4,7 +4,6 @@ import Specification from "../Specification";
 type ProductForm = {
   selected_category?: Category;
   name: string;
-  num_of_rows: number;
   specs: Specification[];
   price: string;
   extra_info: string;

@@ -22,7 +22,6 @@ function mapStateToProps(
     categories: state.catalog.categories,
 
     product_name: state.account.product_form.name,
-    num_of_rows: state.account.product_form.num_of_rows,
     specs: state.account.product_form.specs,
     product_price: state.account.product_form.price,
     extra_info: state.account.product_form.extra_info,

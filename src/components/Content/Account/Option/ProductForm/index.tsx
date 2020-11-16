@@ -172,7 +172,7 @@ const ProductForm = (props: Props) => {
       <TextField
         className={style.form_item}
         required
-        label="Цена"
+        label="Дополнительная информация"
         inputRef={priceRef}
         value={props.price}
         onChange={() => props.updForm("other", 1, priceRef.current!.value)}
@@ -180,11 +180,11 @@ const ProductForm = (props: Props) => {
 
       <TextField
         className={style.form_item}
-        label="Дополнительная информация"
-        multiline
+        required
+        label="Цена"
         inputRef={extraInfoRef}
         value={props.extra_info}
-        onClick={() => props.updForm("other", 2, extraInfoRef.current!.value)}
+        onChange={() => props.updForm("other", 2, extraInfoRef.current!.value)}
       />
 
       <Button
@@ -200,7 +200,7 @@ const ProductForm = (props: Props) => {
             props.price,
             props.extra_info,
             props.creator_id,
-            props.selected_category.id,
+            props.selected_category.id!,
             props.postProduct
           )
         }
