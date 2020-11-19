@@ -4,8 +4,8 @@ import Table from "@material-ui/core/Table";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
-import Product from "../../../types/Product";
-import style from "../../../assets/styles/form.module.css";
+import Product from "../../../../types/Product";
+import style from "./form.module.css";
 import Button from "@material-ui/core/Button";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
@@ -33,10 +33,10 @@ const ProductCard = (props: Props) => {
 
   return (
     <Paper className={style.form} variant="outlined">
-      <Typography className={style.form_item} align="center" variant="h6">
+      <Typography className={style.item} align="center" variant="h6">
         {props.product.name}
       </Typography>
-      <Paper className={style.form_item} variant="outlined">
+      <Paper className={style.item} variant="outlined">
         <Table>
           <TableHead>
             <TableRow>
@@ -47,11 +47,11 @@ const ProductCard = (props: Props) => {
           <TableBody>{table_component}</TableBody>
         </Table>
       </Paper>
-      <Typography className={style.form_item} variant="body1">
+      <Typography className={style.item} variant="body1">
         {props.product.price}
       </Typography>
       <Button
-        className={style.card_btn}
+        className={style.item}
         variant="contained"
         color="primary"
         disableElevation

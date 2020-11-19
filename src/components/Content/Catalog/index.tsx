@@ -5,7 +5,7 @@ import Paper from "@material-ui/core/Paper";
 import React from "react";
 import Category from "../../../types/Category";
 import Product from "../../../types/Product";
-import style from "../../../assets/styles/page.module.css";
+import style from "./style.module.css";
 import ProductCard from "./ProductCard";
 
 type Props = {
@@ -22,27 +22,25 @@ const Catalog = (props: Props) => {
   ));
 
   return (
-    <div className={style.wrapper}>
+    <div>
       {props.didGetCategories || props.didGetProducts ? (
         <>
-          <h1 className={style.title}>Каталог</h1>
+          <h1>Каталог</h1>
           <div className={style.wrapper}>
-            <div className={style.side_wrapper}>
-              <Paper className={style.side}>
-                <List>
-                  {props.categories.map((category: Category) => (
-                    <ListItem key={category.id} button>
-                      {category.name}
-                    </ListItem>
-                  ))}
-                </List>
-              </Paper>
-            </div>
-            <div className={style.main}>{products_component}</div>
+            <Paper className={style.item}>
+              <List>
+                {props.categories.map((category: Category) => (
+                  <ListItem key={category.id} button>
+                    {category.name}
+                  </ListItem>
+                ))}
+              </List>
+            </Paper>
+            <div className={style.item}>{products_component}</div>
           </div>
         </>
       ) : (
-        <div className={style.progress_wrapper}>
+        <div className={style.progress}>
           <CircularProgress />
         </div>
       )}

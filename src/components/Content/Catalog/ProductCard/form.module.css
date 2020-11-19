@@ -1,0 +1,20 @@
+.form {
+  display: flex;
+  flex-direction: column;
+
+  margin-right: 16px;
+  margin-bottom: 16px;
+}
+
+.item {
+  margin: 8px !important;
+}
+
+@media screen and (max-width: 600px) {
+  .form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+    width: inherit;
+  }
+}

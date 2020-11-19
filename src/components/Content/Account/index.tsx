@@ -3,7 +3,7 @@ import List from "@material-ui/core/List/List";
 import React from "react";
 import MyListItem from "./MyListItem";
 import Option from "./Option/container";
-import style from "../../../assets/styles/page.module.css";
+import style from "./style.module.css";
 
 type Props = {
   selected_option: number;
