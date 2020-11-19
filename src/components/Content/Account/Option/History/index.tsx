@@ -16,7 +16,7 @@ type Props = {
 
 const History = (props: Props) => {
   return (
-    <Paper variant="outlined" className={style.option}>
+    <Paper variant="outlined" className={style.form}>
       <Table>
         <TableHead>
           <TableRow>

@@ -1,15 +1,23 @@
 .form {
-  margin-right: 16px;
-  margin-bottom: 16px;
-
   display: flex;
   flex-direction: column;
 
-  height: 200px;
-  width: 95vw;
-  max-width: 400px;
+  margin-right: 16px;
+  margin-bottom: 16px;
+
+  width: 300px;
 }
 
-.form_item {
-  margin: 16px !important;
+.item {
+  margin: 8px !important;
+}
+
+@media screen and (max-width: 600px) {
+  .form {
+    display: flex;
+    flex-direction: column;
+    margin-right: 0px;
+    margin-bottom: 16px;
+    width: 95vw;
+  }
 }

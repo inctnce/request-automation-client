@@ -1,40 +1,28 @@
+.wrapper {
+  width: 95vw;
+  display: flex;
+  flex-direction: row;
+}
+
+.item {
+  margin-right: 16px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
 @media screen and (max-width: 600px) {
   .wrapper {
     width: 95vw;
-
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
+    flex-direction: column;
   }
 
-  .side {
-    width: inherit;
-    height: 120px;
+  .item {
     margin-bottom: 16px;
-  }
-
-  .main {
-    margin-bottom: 16px;
-  }
-}
-
-@media screen and (min-width: 600px) {
-  .wrapper {
+    display: flex;
+    flex-direction: column;
     width: 95vw;
-
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-  }
-
-  .side {
-    width: 200px;
-    height: 120px;
-    margin-bottom: 16px;
-  }
-
-  .main {
-    margin: 0 16px;
-    width: auto;
   }
 }

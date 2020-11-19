@@ -16,37 +16,36 @@ const CategoryForm = (props: Props) => {
   const categoryRef: React.RefObject<HTMLInputElement> = React.createRef();
 
   return (
-    <Paper variant="outlined" className={style.form}>
-      <Typography
-        className={style.form_item + " " + style.heading}
-        align="center"
-      >
-        Добавить категорию
-      </Typography>
+    <div className={style.form}>
+      <Paper variant="outlined" className={style.form}>
+        <Typography className={style.item + " " + style.heading} align="center">
+          Добавить категорию
+        </Typography>
 
-      <TextField
-        className={style.form_item}
-        required
-        inputRef={categoryRef}
-        label="Название"
-        margin="normal"
-      />
-      <Button
-        className={style.form_item}
-        variant="contained"
-        color="primary"
-        disableElevation
-        onClick={() =>
-          postCategory(
-            props.user_id,
-            categoryRef.current!.value,
-            props.postCategory
-          )
-        }
-      >
-        Добавить
-      </Button>
-    </Paper>
+        <TextField
+          className={style.item}
+          required
+          inputRef={categoryRef}
+          label="Название"
+          margin="normal"
+        />
+        <Button
+          className={style.item}
+          variant="contained"
+          color="primary"
+          disableElevation
+          onClick={() =>
+            postCategory(
+              props.user_id,
+              categoryRef.current!.value,
+              props.postCategory
+            )
+          }
+        >
+          Добавить
+        </Button>
+      </Paper>
+    </div>
   );
 };
 

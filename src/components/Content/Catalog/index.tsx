@@ -27,15 +27,17 @@ const Catalog = (props: Props) => {
         <>
           <h1>Каталог</h1>
           <div className={style.wrapper}>
-            <Paper className={style.item}>
-              <List>
-                {props.categories.map((category: Category) => (
-                  <ListItem key={category.id} button>
-                    {category.name}
-                  </ListItem>
-                ))}
-              </List>
-            </Paper>
+            <div>
+              <Paper className={style.item}>
+                <List>
+                  {props.categories.map((category: Category) => (
+                    <ListItem key={category.id} button>
+                      {category.name}
+                    </ListItem>
+                  ))}
+                </List>
+              </Paper>
+            </div>
             <div className={style.item}>{products_component}</div>
           </div>
         </>

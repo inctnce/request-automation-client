@@ -118,12 +118,12 @@ const ProductForm = (props: Props) => {
 
   return (
     <Paper className={style.form} variant="outlined">
-      <Typography className={style.form_item} align="center">
+      <Typography className={style.item} align="center">
         Добавить товар
       </Typography>
 
       <TextField
-        className={style.form_item}
+        className={style.item}
         required
         select
         label="Категория"
@@ -138,7 +138,7 @@ const ProductForm = (props: Props) => {
       </TextField>
 
       <TextField
-        className={style.form_item}
+        className={style.item}
         required
         label="Название"
         inputRef={nameRef}
@@ -146,7 +146,7 @@ const ProductForm = (props: Props) => {
         onChange={() => props.updForm("other", 0, nameRef.current!.value)}
       />
 
-      <Paper variant="outlined" className={style.form_item}>
+      <Paper variant="outlined" className={style.item}>
         <Table>
           <TableHead>
             <TableRow>
@@ -158,7 +158,7 @@ const ProductForm = (props: Props) => {
         </Table>
       </Paper>
 
-      <div className={style.table_btn}>
+      <div className={style.item}>
         <IconButton
           color="primary"
           onClick={() => props.updNumOfRows("increase")}
@@ -174,7 +174,7 @@ const ProductForm = (props: Props) => {
       </div>
 
       <TextField
-        className={style.form_item}
+        className={style.item}
         required
         label="Дополнительная информация"
         inputRef={extraInfoRef}
@@ -183,7 +183,7 @@ const ProductForm = (props: Props) => {
       />
 
       <TextField
-        className={style.form_item}
+        className={style.item}
         required
         label="Цена"
         inputRef={priceRef}
@@ -194,7 +194,7 @@ const ProductForm = (props: Props) => {
       <Button
         variant="contained"
         color="primary"
-        className={style.form_item}
+        className={style.item}
         disableElevation
         onClick={() =>
           postProduct(

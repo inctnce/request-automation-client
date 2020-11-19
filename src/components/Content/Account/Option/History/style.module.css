@@ -1,26 +1,21 @@
-.option {
-  margin-right: 16px;
-  margin-bottom: 16px;
-
-  flex: 1 1 auto;
-  overflow-y: auto;
-
+.form {
   display: flex;
   flex-direction: column;
 
-  width: 400px;
+  margin-right: 16px;
+  margin-bottom: 16px;
 }
 
-@media screen and (max-width: 500px) {
-  .form {
-    margin-left: 0px;
-    margin-bottom: 16px;
-    width: 95vw;
-    max-width: 95vw;
-  }
+.item {
+  margin: 8px !important;
+}
 
-  .option {
+@media screen and (max-width: 600px) {
+  .form {
+    display: flex;
+    flex-direction: column;
+    margin-right: 0px;
     margin-bottom: 16px;
-    width: 95vw;
+    width: inherit;
   }
 }

@@ -14,10 +14,10 @@ type Props = {
 const Account = (props: Props) => {
   return (
     <div>
-      <h1 className={style.title}>Аккаунт</h1>
+      <h1>Аккаунт</h1>
       <div className={style.wrapper}>
-        <div className={style.side_wrapper}>
-          <Paper className={style.side}>
+        <div>
+          <Paper className={style.item}>
             <List>
               <MyListItem
                 isSelected={props.selected_option === 0 ? true : false}
@@ -37,7 +37,7 @@ const Account = (props: Props) => {
             </List>
           </Paper>
         </div>
-        <div className={style.main}>
+        <div className={style.item}>
           <Option />
         </div>
       </div>

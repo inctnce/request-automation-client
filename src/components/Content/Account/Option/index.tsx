@@ -17,7 +17,7 @@ type Props = {
 
 const Option = (props: Props) => {
   if (props.selected_option === 0) {
-    return <div className={style.option}>История</div>;
+    return <div className={style.wrapper}>История</div>;
   }
   if (props.selected_option === 1) {
     return (
