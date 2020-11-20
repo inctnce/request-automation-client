@@ -6,7 +6,7 @@ import React from "react";
 import Category from "../../../types/Category";
 import Product from "../../../types/Product";
 import style from "./style.module.css";
-import ProductCard from "./ProductCard";
+import ProductCard from "../../Reusable/ProductCard";
 
 type Props = {
   didGetCategories: boolean;
@@ -14,12 +14,21 @@ type Props = {
 
   categories: Category[];
   products: Product[];
+
+  addToBag: (product: Product) => void;
 };
 
 const Catalog = (props: Props) => {
-  const products_component = props.products.map((product: Product) => (
-    <ProductCard product={product} />
-  ));
+  const products_component = props.products.map(
+    (product: Product, i: number) => (
+      <ProductCard
+        key={i}
+        product={product}
+        segment="catalog"
+        buttonAction={props.addToBag}
+      />
+    )
+  );
 
   return (
     <div>

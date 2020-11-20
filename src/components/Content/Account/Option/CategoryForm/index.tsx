@@ -6,19 +6,21 @@ import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import postCategory from "./helpers";
+import Alert from "../../../../../types/Alert";
 
 type Props = {
   user_id: string;
   postCategory: (user_id: string, name: string) => void;
+  alert: (alert: Alert) => void;
 };
 
 const CategoryForm = (props: Props) => {
   const categoryRef: React.RefObject<HTMLInputElement> = React.createRef();
 
   return (
-    <div className={style.form}>
+    <div>
       <Paper variant="outlined" className={style.form}>
-        <Typography className={style.item + " " + style.heading} align="center">
+        <Typography className={style.item} align="center" variant="h6">
           Добавить категорию
         </Typography>
 
@@ -38,7 +40,8 @@ const CategoryForm = (props: Props) => {
             postCategory(
               props.user_id,
               categoryRef.current!.value,
-              props.postCategory
+              props.postCategory,
+              props.alert
             )
           }
         >

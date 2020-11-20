@@ -101,9 +101,14 @@ const Header = (props: Props) => {
           </>
         ) : (
           <div className={style.more_btn}>
-            <IconButton aria-haspopup="true" onClick={handleClick}>
+            <IconButton
+              className={style.more_btn}
+              aria-haspopup="true"
+              onClick={handleClick}
+            >
               <MoreVert />
             </IconButton>
+           
             <Menu
               id="simple-menu"
               anchorEl={anchorEl}

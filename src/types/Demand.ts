@@ -4,7 +4,7 @@ type Demand = {
   id?: string;
   name: string;
   products: Product[];
-  total_cost: number;
+  total_cost: string;
   deadlines: string;
   address: string;
   financing_source: string;

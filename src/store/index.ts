@@ -19,6 +19,8 @@ import account from "./reducers/account";
 import AccountPage from "../types/pages/AccountPage";
 import catalog from "./reducers/catalog";
 import CatalogPage from "../types/pages/CatalogPage";
+import bag from "./reducers/bag";
+import BagPage from "../types/pages/BagPage";
 
 import watchLogin from "./sagas/user/login";
 import watchPostCategory from "./sagas/category/post";
@@ -32,6 +34,7 @@ const reducers = combineReducers({
   login: login,
   account: account,
   catalog: catalog,
+  bag: bag,
 });
 const saga = createSagaMiddleware();
 let store: Store<
@@ -41,6 +44,7 @@ let store: Store<
     header: Header;
     account: AccountPage;
     catalog: CatalogPage;
+    bag: BagPage;
   }>,
   Action
 > = createStore(reducers, applyMiddleware(logger, saga));

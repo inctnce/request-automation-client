@@ -32,6 +32,11 @@ function app(state: AppPage = initialState, action: Action): AppPage {
         isAuth: false,
         didSetUser: false,
       };
+    case ACTION.ALERT:
+      return {
+        ...state,
+        alert: { ...action.payload },
+      };
   }
   return state;
 }

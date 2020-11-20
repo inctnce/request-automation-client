@@ -1,0 +1,28 @@
+.wrapper {
+  width: 95vw;
+  display: flex;
+  flex-direction: row;
+}
+
+.item {
+  margin-right: 16px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 600px) {
+  .wrapper {
+    width: 95vw;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .item {
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    width: 95vw;
+  }
+}

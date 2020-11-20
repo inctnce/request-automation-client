@@ -10,7 +10,7 @@ export default function postDemand(
   if (demand.products.length === 0) {
     return "error";
   }
-  if (demand.total_cost === 0 || demand.total_cost === undefined) {
+  if (demand.total_cost === "" || demand.total_cost === undefined) {
     return "error";
   }
   if (demand.deadlines.trim() === "" || demand.deadlines === undefined) {

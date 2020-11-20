@@ -118,7 +118,7 @@ const ProductForm = (props: Props) => {
 
   return (
     <Paper className={style.form} variant="outlined">
-      <Typography className={style.item} align="center">
+      <Typography className={style.item} align="center" variant="h6">
         Добавить товар
       </Typography>
 

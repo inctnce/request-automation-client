@@ -8,6 +8,11 @@ const app: AppPage = {
   didSetUser: didSetUserLS.get(),
   isAdmin: false,
   user: userLS.get(),
+
+  alert: {
+    message: "",
+    severity: "info",
+  },
 };
 
 export default app;
