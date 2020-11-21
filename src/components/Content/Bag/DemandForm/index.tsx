@@ -18,7 +18,7 @@ const DemandForm = () => {
         <TextField className={style.item} label="адрес" />
         <TextField className={style.item} label="источник финансирования" />
         <TextField className={style.item} label="контактное лицо" />
-        <TextField className={style.item} label="ответственное лицо лицо" />
+        <TextField className={style.item} label="ответственное лицо" />
         <Button
           className={style.item}
           variant="contained"
