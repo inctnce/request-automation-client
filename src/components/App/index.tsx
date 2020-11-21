@@ -5,6 +5,7 @@ import AlertT from "../../types/Alert";
 import Content from "../Content";
 import Header from "../Header/container";
 import style from "./style.module.css";
+import Collapse from "@material-ui/core/Collapse";
 
 type Props = {
   isAuth: boolean;
@@ -45,13 +46,12 @@ function App(props: Props) {
       {props.isAuth ? (
         <div className={style.wrapper}>
           <Header />
-          {isAlert ? (
+
+          <Collapse in={isAlert}>
             <Alert className={style.alert} severity="error">
               {props.alert.message}
             </Alert>
-          ) : (
-            <></>
-          )}
+          </Collapse>
           <Content />
         </div>
       ) : (
