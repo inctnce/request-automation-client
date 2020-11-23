@@ -30,6 +30,11 @@ function catalog(
         ...state,
         products: [...state.products, action.payload],
       };
+    case ACTION.SELECT_CATEGORY:
+      return {
+        ...state,
+        selected_category: action.payload,
+      };
   }
 
   return state;

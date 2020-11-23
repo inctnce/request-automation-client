@@ -12,9 +12,12 @@ type Props = {
   didGetCategories: boolean;
   didGetProducts: boolean;
 
+  selected_category: Category;
   categories: Category[];
+
   products: Product[];
 
+  selectCategory: (category: Category) => void;
   addToBag: (product: Product) => void;
 };
 
@@ -40,7 +43,14 @@ const Catalog = (props: Props) => {
               <Paper className={style.item}>
                 <List>
                   {props.categories.map((category: Category) => (
-                    <ListItem key={category.id} button>
+                    <ListItem
+                      key={category.id}
+                      button
+                      onClick={() => props.selectCategory(category)}
+                      selected={
+                        props.selected_category === category ? true : false
+                      }
+                    >
                       {category.name}
                     </ListItem>
                   ))}

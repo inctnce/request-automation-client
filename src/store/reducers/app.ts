@@ -5,7 +5,6 @@ import ACTION from "../ACTION";
 import userLS from "../../localStorage/user";
 import authLS from "../../localStorage/auth";
 import didSetUserLS from "../../localStorage/didSetUser";
-import { act } from "react-dom/test-utils";
 
 function app(state: AppPage = initialState, action: Action): AppPage {
   switch (action.type) {

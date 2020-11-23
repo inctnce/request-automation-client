@@ -76,6 +76,13 @@ function setProducts(products: Product[]): Action {
   };
 }
 
+function selectCategory(category: Category): Action {
+  return {
+    type: ACTION.SELECT_CATEGORY,
+    payload: category,
+  };
+}
+
 const catalogAC = {
   postCategory: postCategory,
   setCategory: setCategory,
@@ -85,6 +92,7 @@ const catalogAC = {
   getProducts: getProducts,
   setCategories: setCategories,
   setProducts: setProducts,
+  selectCategory: selectCategory
 };
 
 export default catalogAC;
