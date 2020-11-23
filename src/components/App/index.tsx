@@ -29,7 +29,7 @@ function App(props: Props) {
     if (props.isAlert) {
       const interval = setTimeout(() => {
         props.cleanAlert();
-      }, 4000);
+      }, 3000);
 
       return () => clearTimeout(interval);
     }
@@ -52,7 +52,11 @@ function App(props: Props) {
 
           <Collapse in={props.isAlert}>
             <Alert className={style.alert} severity={props.alert.severity}>
-              <AlertTitle>{props.alert.title}</AlertTitle>
+              {props.alert.title ? (
+                <AlertTitle>{props.alert.title}</AlertTitle>
+              ) : (
+                <></>
+              )}
               {props.alert.message}
             </Alert>
           </Collapse>
