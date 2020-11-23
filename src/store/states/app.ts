@@ -9,6 +9,7 @@ const app: AppPage = {
   isAdmin: false,
   user: userLS.get(),
 
+  isAlert: false,
   alert: {
     message: "",
     severity: "info",

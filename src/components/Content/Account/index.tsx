@@ -17,7 +17,7 @@ const Account = (props: Props) => {
       <h1>Аккаунт</h1>
       <div className={style.wrapper}>
         <div>
-          <Paper className={style.item}>
+          <Paper className={style.item} variant="outlined">
             <List>
               <MyListItem
                 isSelected={props.selected_option === 0 ? true : false}

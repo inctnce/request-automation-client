@@ -47,13 +47,13 @@ function account(
               : state.product_form.name,
           price:
             action.payload.segment === "other"
-              ? action.payload.key === 1
+              ? action.payload.key === 2
                 ? action.payload.value
                 : state.product_form.price
               : state.product_form.price,
           extra_info:
             action.payload.segment === "other"
-              ? action.payload.key === 2
+              ? action.payload.key === 1
                 ? action.payload.value
                 : state.product_form.extra_info
               : state.product_form.extra_info,

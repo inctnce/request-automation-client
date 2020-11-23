@@ -29,6 +29,7 @@ enum ACTION {
   REMOVE_FROM_BAG = "REMOVE_FROM_BAG",
 
   ALERT = "ALERT",
+  CLEAN_ALERT = "CLEAN_ALERT",
 }
 
 export default ACTION;

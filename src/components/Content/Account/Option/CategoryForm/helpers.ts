@@ -12,9 +12,12 @@ export default function postCategory(
     category_name.trim() === "" ||
     category_name === undefined
   ) {
-    alert({ message: "Ошибка добавления категории", severity: "error" });
+    alert({
+      message: "Указано пустое имя категории",
+      severity: "error",
+      
+    });
     return "error";
   }
-  alert({ message: "Категория успешно добавлена", severity: "success" });
   post(user_id, category_name.trim());
 }

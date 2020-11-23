@@ -5,6 +5,7 @@ import ACTION from "../ACTION";
 import userLS from "../../localStorage/user";
 import authLS from "../../localStorage/auth";
 import didSetUserLS from "../../localStorage/didSetUser";
+import { act } from "react-dom/test-utils";
 
 function app(state: AppPage = initialState, action: Action): AppPage {
   switch (action.type) {
@@ -35,7 +36,13 @@ function app(state: AppPage = initialState, action: Action): AppPage {
     case ACTION.ALERT:
       return {
         ...state,
-        alert: { ...action.payload },
+        isAlert: true,
+        alert: action.payload,
+      };
+    case ACTION.CLEAN_ALERT:
+      return {
+        ...state,
+        isAlert: false,
       };
   }
   return state;

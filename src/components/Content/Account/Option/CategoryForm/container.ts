@@ -23,7 +23,7 @@ function mapDispatchToProps(dispatch: (action: Action) => void) {
       dispatch(catalogAC.postCategory(user_id, name));
     },
     alert: (alert: Alert) => {
-      dispatch(appAC.alert(alert));
+      dispatch(appAC.setAlert(alert));
     },
   };
 }

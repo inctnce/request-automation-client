@@ -7,6 +7,7 @@ type AppPage = {
   isAdmin: boolean;
   user?: User;
 
+  isAlert: boolean;
   alert?: Alert;
 };
 

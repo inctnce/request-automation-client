@@ -1,10 +1,13 @@
 import Axios from "axios";
 import { call, put, takeEvery } from "redux-saga/effects";
 import ACTION from "../../ACTION";
+import appAC from "../../actionCreators/app";
 import catalogAC from "../../actionCreators/catalog";
 
 async function getCategories() {
-  return await Axios.get("https://request-automation-api.herokuapp.com/categories/get")
+  return await Axios.get(
+    "https://request-automation-api.herokuapp.com/categories/get"
+  )
     .then((response) => {
       if (response.status === 200) {
         return response.data;
@@ -12,8 +15,8 @@ async function getCategories() {
         return "error";
       }
     })
-    .catch((err) => {
-      alert(err.response.data);
+    .catch(() => {
+      return;
     });
 }
 
@@ -21,8 +24,14 @@ function* workerGetCategories() {
   const data = yield call(getCategories);
 
   if (data !== undefined) {
-    console.log(data);
     yield put(catalogAC.setCategories(data));
+  } else {
+    yield put(
+      appAC.setAlert({
+        message: "Ошибка получения категорий",
+        severity: "error",
+      })
+    );
   }
 }
 

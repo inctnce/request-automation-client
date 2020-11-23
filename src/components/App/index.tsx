@@ -6,10 +6,13 @@ import Content from "../Content";
 import Header from "../Header/container";
 import style from "./style.module.css";
 import Collapse from "@material-ui/core/Collapse";
+import AlertTitle from "@material-ui/lab/AlertTitle/AlertTitle";
 
 type Props = {
   isAuth: boolean;
   isAdmin: boolean;
+
+  isAlert: boolean;
   alert: AlertT;
 
   didGetCategories: boolean;
@@ -17,20 +20,20 @@ type Props = {
 
   didGetProducts: boolean;
   getProducts: () => void;
+
+  cleanAlert: () => void;
 };
 
 function App(props: Props) {
-  const [isAlert, setAlert] = React.useState(false);
-
   React.useEffect(() => {
-    if (props.alert.message) {
-      setAlert(true);
+    if (props.isAlert) {
       const interval = setTimeout(() => {
-        setAlert(false);
-      }, 3000);
+        props.cleanAlert();
+      }, 4000);
+
       return () => clearTimeout(interval);
     }
-  }, [props.alert.message]);
+  }, [props.isAlert]);
 
   if (props.isAuth) {
     if (!props.didGetCategories) {
@@ -47,8 +50,9 @@ function App(props: Props) {
         <div className={style.wrapper}>
           <Header />
 
-          <Collapse in={isAlert}>
-            <Alert className={style.alert} severity="error">
+          <Collapse in={props.isAlert}>
+            <Alert className={style.alert} severity={props.alert.severity}>
+              <AlertTitle>{props.alert.title}</AlertTitle>
               {props.alert.message}
             </Alert>
           </Collapse>

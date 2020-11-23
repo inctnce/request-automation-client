@@ -2,6 +2,7 @@ import Axios from "axios";
 import { call, put, takeEvery } from "redux-saga/effects";
 import Action from "../../../types/Action";
 import ACTION from "../../ACTION";
+import appAC from "../../actionCreators/app";
 import catalogAC from "../../actionCreators/catalog";
 
 async function postCategory(creator_id: string, name: string) {
@@ -21,9 +22,8 @@ async function postCategory(creator_id: string, name: string) {
         return "error";
       }
     })
-    .catch((err) => {
-      alert(err.response.data);
-      return err.response.data;
+    .catch(() => {
+      return;
     });
 }
 
@@ -36,8 +36,20 @@ function* workerPostCategory(action: Action) {
 
   if (data !== undefined) {
     console.log(data);
+    yield put(
+      appAC.setAlert({
+        message: "Категория добавлена",
+        severity: "success",
+      })
+    );
     yield put(catalogAC.setCategory(data));
-  }
+  } else
+    yield put(
+      appAC.setAlert({
+        message: "Ошибка добавления категории",
+        severity: "error",
+      })
+    );
 }
 
 function* watchPostCategory() {

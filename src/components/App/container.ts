@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import { CombinedState } from "redux";
 import App from ".";
+import appAC from "../../store/actionCreators/app";
 import catalogAC from "../../store/actionCreators/catalog";
 import Action from "../../types/Action";
 import AppPage from "../../types/pages/AppPage";
@@ -16,6 +17,7 @@ function mapStateToProps(
     didGetCategories: state.catalog.didGetCategories,
     didGetProducts: state.catalog.didGetProducts,
 
+    isAlert: state.app.isAlert,
     alert: state.app.alert!,
   };
 }
@@ -27,6 +29,10 @@ function mapDispatchToProps(dispatch: (action: Action) => void) {
     },
     getProducts: () => {
       dispatch(catalogAC.getProducts());
+    },
+
+    cleanAlert: () => {
+      dispatch(appAC.cleanAlert());
     },
   };
 }

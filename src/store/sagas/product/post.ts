@@ -2,6 +2,7 @@ import Axios from "axios";
 import { call, put, takeEvery } from "redux-saga/effects";
 import Action from "../../../types/Action";
 import ACTION from "../../ACTION";
+import appAC from "../../actionCreators/app";
 import catalogAC from "../../actionCreators/catalog";
 
 async function postCategory(
@@ -34,8 +35,8 @@ async function postCategory(
         return "error";
       }
     })
-    .catch((err) => {
-      alert(err.response.data);
+    .catch((_err) => {
+      return;
     });
 }
 
@@ -53,7 +54,20 @@ function* workerPostProduct(action: Action) {
 
   if (data !== undefined) {
     console.log(data);
+    yield put(
+      appAC.setAlert({
+        message: "Товар добавлен",
+        severity: "success",
+      })
+    );
     yield put(catalogAC.setProduct(data));
+  } else {
+    yield put(
+      appAC.setAlert({
+        message: "Ошибка добавления товара",
+        severity: "error",
+      })
+    );
   }
 }
 

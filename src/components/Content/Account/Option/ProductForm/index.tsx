@@ -178,7 +178,7 @@ const ProductForm = (props: Props) => {
         required
         label="Дополнительная информация"
         inputRef={extraInfoRef}
-        value={props.price}
+        value={props.extra_info}
         onChange={() => props.updForm("other", 1, extraInfoRef.current!.value)}
       />
 
@@ -187,7 +187,7 @@ const ProductForm = (props: Props) => {
         required
         label="Цена"
         inputRef={priceRef}
-        value={props.extra_info}
+        value={props.price}
         onChange={() => props.updForm("other", 2, priceRef.current!.value)}
       />
 
