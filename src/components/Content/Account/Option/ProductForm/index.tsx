@@ -34,11 +34,7 @@ type Props = {
   updNumOfRows: (action: "increase" | "decrease") => void;
 
   updTable: (type: "spec" | "value", index: number, value: string) => void;
-  updForm: (
-    segment: "category" | "other",
-    key: number,
-    value: string | Category
-  ) => void;
+  updForm: (segment: "category" | "other", key: number, value: string | Category) => void;
 
   postProduct: (
     name: string,
@@ -52,9 +48,7 @@ type Props = {
 };
 
 const ProductForm = (props: Props) => {
-  const [category, setCategory] = React.useState(
-    props.categories[0].name || ""
-  );
+  const [category, setCategory] = React.useState(props.categories[0].name || "");
 
   React.useEffect(() => {
     props.updForm("category", 0, props.categories[0]);
@@ -63,11 +57,9 @@ const ProductForm = (props: Props) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCategory(event.target.value);
 
-    const category: Category | undefined = props.categories.find(
-      (currentValue: Category) => {
-        return currentValue.name === event.target.value;
-      }
-    );
+    const category: Category | undefined = props.categories.find((currentValue: Category) => {
+      return currentValue.name === event.target.value;
+    });
 
     props.updForm("category", 0, category!);
   };
@@ -93,19 +85,15 @@ const ProductForm = (props: Props) => {
               placeholder="характеристика"
               value={props.specs[i].spec}
               inputRef={specRefs[i]}
-              onChange={() =>
-                props.updTable("spec", i, specRefs[i].current!.value)
-              }
+              onChange={() => props.updTable("spec", i, specRefs[i].current!.value)}
             />
           </TableCell>
           <TableCell>
             <InputBase
               placeholder="значение"
-              value={props.specs[i].value}
+              value={props.specs[i].setting}
               inputRef={valueRefs[i]}
-              onChange={() =>
-                props.updTable("value", i, valueRefs[i].current!.value)
-              }
+              onChange={() => props.updTable("value", i, valueRefs[i].current!.value)}
             />
           </TableCell>
         </TableRow>
@@ -117,101 +105,90 @@ const ProductForm = (props: Props) => {
   const table_component = createSpecsTable();
 
   return (
-    <Paper className={style.form} variant="outlined">
-      <Typography className={style.item} align="center" variant="h6">
-        Добавить товар
-      </Typography>
+    <div>
+      <Paper className={style.form} variant="outlined">
+        <Typography className={style.item} align="center" variant="h6">
+          Добавить товар
+        </Typography>
 
-      <TextField
-        className={style.item}
-        required
-        select
-        label="Категория"
-        value={category}
-        onChange={handleChange}
-      >
-        {props.categories.map((category: Category, index: number) => (
-          <MenuItem key={index} value={category.name}>
-            {category.name}
-          </MenuItem>
-        ))}
-      </TextField>
+        <TextField className={style.item} required select label="Категория" value={category} onChange={handleChange}>
+          {props.categories.map((category: Category, index: number) => (
+            <MenuItem key={index} value={category.name}>
+              {category.name}
+            </MenuItem>
+          ))}
+        </TextField>
 
-      <TextField
-        className={style.item}
-        required
-        label="Название"
-        inputRef={nameRef}
-        value={props.name}
-        onChange={() => props.updForm("other", 0, nameRef.current!.value)}
-      />
+        <TextField
+          className={style.item}
+          required
+          label="Название"
+          inputRef={nameRef}
+          value={props.name}
+          onChange={() => props.updForm("other", 0, nameRef.current!.value)}
+        />
 
-      <Paper variant="outlined" className={style.item}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Характеристики</TableCell>
-              <TableCell>Значения</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>{table_component}</TableBody>
-        </Table>
+        <Paper variant="outlined" className={style.item}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Характеристики</TableCell>
+                <TableCell>Значения</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>{table_component}</TableBody>
+          </Table>
+        </Paper>
+
+        <div className={style.item}>
+          <IconButton color="primary" onClick={() => props.updNumOfRows("increase")}>
+            <Add />
+          </IconButton>
+          <IconButton color="primary" onClick={() => props.updNumOfRows("decrease")}>
+            <Remove />
+          </IconButton>
+        </div>
+
+        <TextField
+          className={style.item}
+          required
+          label="Дополнительная информация"
+          inputRef={extraInfoRef}
+          value={props.extra_info}
+          onChange={() => props.updForm("other", 1, extraInfoRef.current!.value)}
+        />
+
+        <TextField
+          className={style.item}
+          required
+          label="Цена"
+          inputRef={priceRef}
+          value={props.price}
+          onChange={() => props.updForm("other", 2, priceRef.current!.value)}
+        />
+
+        <Button
+          variant="contained"
+          color="primary"
+          className={style.item}
+          disableElevation
+          onClick={() =>
+            postProduct(
+              props.name,
+              parseSpecs("specs", props.specs),
+              parseSpecs("values", props.specs),
+              props.price,
+              props.extra_info,
+              props.creator_id,
+              props.selected_category.id!,
+              props.postProduct
+            )
+          }
+        >
+          Добавить
+        </Button>
       </Paper>
-
-      <div className={style.item}>
-        <IconButton
-          color="primary"
-          onClick={() => props.updNumOfRows("increase")}
-        >
-          <Add />
-        </IconButton>
-        <IconButton
-          color="primary"
-          onClick={() => props.updNumOfRows("decrease")}
-        >
-          <Remove />
-        </IconButton>
-      </div>
-
-      <TextField
-        className={style.item}
-        required
-        label="Дополнительная информация"
-        inputRef={extraInfoRef}
-        value={props.extra_info}
-        onChange={() => props.updForm("other", 1, extraInfoRef.current!.value)}
-      />
-
-      <TextField
-        className={style.item}
-        required
-        label="Цена"
-        inputRef={priceRef}
-        value={props.price}
-        onChange={() => props.updForm("other", 2, priceRef.current!.value)}
-      />
-
-      <Button
-        variant="contained"
-        color="primary"
-        className={style.item}
-        disableElevation
-        onClick={() =>
-          postProduct(
-            props.name,
-            parseSpecs("specs", props.specs),
-            parseSpecs("values", props.specs),
-            props.price,
-            props.extra_info,
-            props.creator_id,
-            props.selected_category.id!,
-            props.postProduct
-          )
-        }
-      >
-        Добавить
-      </Button>
-    </Paper>
+    </div>
   );
 };
 
