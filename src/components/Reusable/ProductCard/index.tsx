@@ -25,7 +25,7 @@ const ProductCard = (props: Props) => {
       result.push(
         <TableRow key={i}>
           <TableCell>{props.product.specs[i]}</TableCell>
-          <TableCell>{props.product.values[i]}</TableCell>
+          <TableCell>{props.product.settings[i]}</TableCell>
         </TableRow>
       );
     }

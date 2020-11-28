@@ -1,6 +1,6 @@
 type Specification = {
   spec: string;
-  value: string;
+  setting: string;
 };
 
 export default Specification;

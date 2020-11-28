@@ -5,10 +5,10 @@ import ACTION from "../../ACTION";
 import appAC from "../../actionCreators/app";
 import catalogAC from "../../actionCreators/catalog";
 
-async function postCategory(
+async function postProduct(
   name: string,
   specs: string[],
-  values: string[],
+  settings: string[],
   price: string,
   extra_info: string,
   creator_id: string,
@@ -17,17 +17,14 @@ async function postCategory(
   const data = {
     name: name,
     specs: specs.join(),
-    values: values.join(),
+    settings: settings.join(),
     price: price,
     extra_info: extra_info,
     creator_id: creator_id,
     category_id: category_id,
   };
 
-  return await Axios.post(
-    "https://request-automation-api.herokuapp.com/products/post",
-    data
-  )
+  return await Axios.post("https://request-automation-api.herokuapp.com/products/post", data)
     .then((response) => {
       if (response.status === 201) {
         return response.data;
@@ -35,17 +32,18 @@ async function postCategory(
         return "error";
       }
     })
-    .catch((_err) => {
+    .catch((err) => {
+      console.log(err);
       return;
     });
 }
 
 function* workerPostProduct(action: Action) {
   const data = yield call(
-    postCategory,
+    postProduct,
     action.payload.name,
     action.payload.specs,
-    action.payload.values,
+    action.payload.settings,
     action.payload.price,
     action.payload.extra_info,
     action.payload.creator_id,

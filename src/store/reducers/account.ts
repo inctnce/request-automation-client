@@ -21,7 +21,7 @@ function account(
           ...state.product_form,
           specs:
             action.payload === "increase"
-              ? [...state.product_form.specs, { spec: "", value: "" }]
+              ? [...state.product_form.specs, { spec: "", setting: "" }]
               : [
                   ...state.product_form.specs.splice(
                     state.product_form.specs.length - 1,
@@ -62,11 +62,11 @@ function account(
     case ACTION.UPD_PRODUCT_FORM_TABLE:
       let value: Specification = {
         spec: state.product_form.specs[action.payload.index].spec,
-        value: state.product_form.specs[action.payload.index].value,
+        setting: state.product_form.specs[action.payload.index].setting,
       };
       action.payload.type === "spec"
         ? (value.spec = action.payload.value)
-        : (value.value = action.payload.value);
+        : (value.setting = action.payload.value);
 
       state.product_form.specs[action.payload.index] = value;
 

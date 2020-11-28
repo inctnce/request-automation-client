@@ -23,7 +23,7 @@ function setCategory(category: Category): Action {
 function postProduct(
   name: string,
   specs: string[],
-  values: string[],
+  settings: string[],
   price: string,
   extra_info: string,
   creator_id: string,
@@ -34,7 +34,7 @@ function postProduct(
     payload: {
       name: name,
       specs: specs,
-      values: values,
+      settings: settings,
       price: price,
       extra_info: extra_info,
       creator_id: creator_id,
@@ -92,7 +92,7 @@ const catalogAC = {
   getProducts: getProducts,
   setCategories: setCategories,
   setProducts: setProducts,
-  selectCategory: selectCategory
+  selectCategory: selectCategory,
 };
 
 export default catalogAC;

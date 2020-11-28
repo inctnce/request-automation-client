@@ -5,7 +5,7 @@ const account: AccountPage = {
 
   product_form: {
     name: "",
-    specs: [{ spec: "", value: "" }],
+    specs: [{ spec: "", setting: "" }],
     price: "",
     extra_info: "",
   },

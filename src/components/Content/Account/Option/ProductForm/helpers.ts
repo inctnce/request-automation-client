@@ -11,7 +11,7 @@ export function parseSpecs(
     });
   } else {
     specs.forEach((spec: Specification) => {
-      result.push(spec.value);
+      result.push(spec.setting);
     });
   }
   return result;
