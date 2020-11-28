@@ -16,30 +16,32 @@ type Props = {
 
 const History = (props: Props) => {
   return (
-    <Paper variant="outlined" className={style.form}>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Название</TableCell>
-            <TableCell>Дата создания</TableCell>
-            <TableCell>Изменить</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {props.items.map((category: Category) => (
-            <TableRow key={category.id}>
-              <TableCell>{category.name}</TableCell>
-              <TableCell>{category.creation_date}</TableCell>
-              <TableCell>
-                <IconButton>
-                  <Edit />
-                </IconButton>
-              </TableCell>
+    <div>
+      <Paper variant="outlined" className={style.form}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Название</TableCell>
+              <TableCell>Дата создания</TableCell>
+              <TableCell>Изменить</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </Paper>
+          </TableHead>
+          <TableBody>
+            {props.items.map((category: Category) => (
+              <TableRow key={category.id}>
+                <TableCell>{category.name}</TableCell>
+                <TableCell>{category.creation_date}</TableCell>
+                <TableCell>
+                  <IconButton>
+                    <Edit />
+                  </IconButton>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </Paper>
+    </div>
   );
 };
 
