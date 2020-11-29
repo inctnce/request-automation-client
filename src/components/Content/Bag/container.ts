@@ -8,7 +8,7 @@ import Product from "../../../types/Product";
 
 function mapStateToProps(state: CombinedState<{ bag: BagPage }>) {
   return {
-    demand: state.bag.demand,
+    products: state.bag.demand.products! ,
   };
 }
 

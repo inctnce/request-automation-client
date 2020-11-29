@@ -4,7 +4,10 @@ const catalog: CatalogPage = {
   didGetCategories: false,
   didGetProducts: false,
 
+  selected_categories: [],
   categories: [],
+
+  needLoadUpProducts: true,
   products: [],
 };
 

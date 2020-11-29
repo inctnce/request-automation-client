@@ -1,10 +1,4 @@
-import {
-  applyMiddleware,
-  CombinedState,
-  combineReducers,
-  createStore,
-  Store,
-} from "redux";
+import { applyMiddleware, CombinedState, combineReducers, createStore, Store } from "redux";
 import createSagaMiddleware from "redux-saga";
 import logger from "redux-logger";
 import Action from "../types/Action";
@@ -27,6 +21,7 @@ import watchPostCategory from "./sagas/category/post";
 import watchGetCategories from "./sagas/category/get";
 import watchPostProduct from "./sagas/product/post";
 import watchGetProducts from "./sagas/product/get";
+import watchPostDemand from "./sagas/demand/post";
 
 const reducers = combineReducers({
   app: app,
@@ -54,5 +49,6 @@ saga.run(watchPostCategory);
 saga.run(watchGetCategories);
 saga.run(watchPostProduct);
 saga.run(watchGetProducts);
+saga.run(watchPostDemand);
 
 export default store;

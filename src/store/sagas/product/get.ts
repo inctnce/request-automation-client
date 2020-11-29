@@ -1,12 +1,19 @@
 import Axios from "axios";
-import { call, put, takeEvery } from "redux-saga/effects";
+import { act } from "react-dom/test-utils";
+import { call, put, takeLatest } from "redux-saga/effects";
+import Action from "../../../types/Action";
 import ACTION from "../../ACTION";
 import catalogAC from "../../actionCreators/catalog";
 
-async function getProducts() {
-  return await Axios.get(
-    "https://request-automation-api.herokuapp.com/products/get"
-  )
+function formulateRequest(key?: string, id?: string): string {
+  if (key) {
+    return `https://request-automation-api.herokuapp.com/products/get/${key}/${id}`;
+  }
+  return `https://request-automation-api.herokuapp.com/products/get`;
+}
+
+async function getProducts(key?: string, id?: string) {
+  return await Axios.get(formulateRequest(key, id))
     .then((response) => {
       if (response.status === 200) {
         return response.data;
@@ -19,21 +26,30 @@ async function getProducts() {
     });
 }
 
-function* workerGetProducts() {
-  const data = yield call(getProducts);
+function* workerGetProducts(action: Action) {
+  const data = yield call(getProducts, action.payload.key, action.payload.id);
+
+  console.log(data);
 
   if (data !== undefined) {
     for (let i = 0; i < data.length; i++) {
       data[i].specs = data[i].specs.split(",").map(String);
-      data[i].values = data[i].values.split(",").map(String);
+      data[i].settings = data[i].settings.split(",").map(String);
     }
 
-    yield put(catalogAC.setProducts(data));
+    switch (action.payload.key) {
+      case "category":
+        yield put(catalogAC.setProducts(data));
+        return;
+      case "user":
+        yield put(catalogAC.setProducts(data, true));
+        return;
+    }
   }
 }
 
 function* watchGetProducts() {
-  yield takeEvery(ACTION.GET_PRODUCTS, workerGetProducts);
+  yield takeLatest(ACTION.GET_PRODUCTS, workerGetProducts);
 }
 
 export default watchGetProducts;

@@ -4,10 +4,7 @@ import AccountPage from "../../types/pages/AccountPage";
 import ACTION from "../ACTION";
 import Specification from "../../types/Specification";
 
-function account(
-  state: AccountPage = initialState,
-  action: Action
-): AccountPage {
+function account(state: AccountPage = initialState, action: Action): AccountPage {
   switch (action.type) {
     case ACTION.SET_OPTION:
       return {
@@ -22,12 +19,7 @@ function account(
           specs:
             action.payload === "increase"
               ? [...state.product_form.specs, { spec: "", setting: "" }]
-              : [
-                  ...state.product_form.specs.splice(
-                    state.product_form.specs.length - 1,
-                    1
-                  ),
-                ],
+              : [...state.product_form.specs.splice(state.product_form.specs.length - 1, 1)],
         },
       };
     case ACTION.UPD_PRODUCT_FORM:
@@ -36,9 +28,7 @@ function account(
         product_form: {
           ...state.product_form,
           selected_category:
-            action.payload.segment === "category"
-              ? action.payload.value
-              : state.product_form.selected_category,
+            action.payload.segment === "category" ? action.payload.value : state.product_form.selected_category,
           name:
             action.payload.segment === "other"
               ? action.payload.key === 0
@@ -64,9 +54,7 @@ function account(
         spec: state.product_form.specs[action.payload.index].spec,
         setting: state.product_form.specs[action.payload.index].setting,
       };
-      action.payload.type === "spec"
-        ? (value.spec = action.payload.value)
-        : (value.setting = action.payload.value);
+      action.payload.type === "spec" ? (value.spec = action.payload.value) : (value.setting = action.payload.value);
 
       state.product_form.specs[action.payload.index] = value;
 
@@ -76,6 +64,13 @@ function account(
           ...state.product_form,
           specs: [...state.product_form.specs],
         },
+      };
+
+    case ACTION.SET_PRODUCTS:
+      return {
+        ...state,
+        didGetUserProducts: action.payload.forUser ? true : false,
+        user_products: action.payload.forUser ? [...action.payload.products] : state.user_products,
       };
   }
   return state;

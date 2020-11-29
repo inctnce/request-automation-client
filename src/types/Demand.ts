@@ -3,14 +3,14 @@ import Product from "./Product";
 type Demand = {
   id?: string;
   name: string;
-  products: Product[];
+  products?: Product[];
   total_cost: string;
   deadlines: string;
   address: string;
   financing_source: string;
   contact_person: string;
   responsible_person: string;
-  creator_id: string;
+  creator_id?: string;
   creation_date?: Date;
 };
 

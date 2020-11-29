@@ -11,6 +11,7 @@ import ProductCard from "../../Reusable/ProductCard";
 type Props = {
   didGetCategories: boolean;
   didGetProducts: boolean;
+  needLoadUpProduct: boolean;
 
   selected_category: Category;
   categories: Category[];
@@ -18,20 +19,22 @@ type Props = {
   products: Product[];
 
   selectCategory: (category: Category) => void;
+
+  getProducts: (key: string, id: string) => void;
+
   addToBag: (product: Product) => void;
 };
 
 const Catalog = (props: Props) => {
-  const products_component = props.products.map(
-    (product: Product, i: number) => (
-      <ProductCard
-        key={i}
-        product={product}
-        segment="catalog"
-        buttonAction={props.addToBag}
-      />
-    )
-  );
+  React.useEffect(() => {
+    if (props.selected_category && props.needLoadUpProduct) {
+      props.getProducts("category", props.selected_category.id!);
+    }
+  }, [props.selected_category]);
+
+  const products_component = props.products.map((product: Product, i: number) => (
+    <ProductCard key={i} product={product} segment="catalog" buttonAction={props.addToBag} />
+  ));
 
   return (
     <div>
@@ -47,9 +50,7 @@ const Catalog = (props: Props) => {
                       key={category.id}
                       button
                       onClick={() => props.selectCategory(category)}
-                      selected={
-                        props.selected_category === category ? true : false
-                      }
+                      selected={props.selected_category === category ? true : false}
                     >
                       {category.name}
                     </ListItem>

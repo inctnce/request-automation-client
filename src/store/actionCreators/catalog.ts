@@ -1,5 +1,6 @@
 import Action from "../../types/Action";
 import Category from "../../types/Category";
+import Demand from "../../types/Demand";
 import Product from "../../types/Product";
 import ACTION from "../ACTION";
 
@@ -56,9 +57,13 @@ function getCategories(): Action {
   };
 }
 
-function getProducts(): Action {
+function getProducts(key?: string, id?: string): Action {
   return {
     type: ACTION.GET_PRODUCTS,
+    payload: {
+      key: key,
+      id: id,
+    },
   };
 }
 
@@ -69,10 +74,13 @@ function setCategories(categories: Category[]): Action {
   };
 }
 
-function setProducts(products: Product[]): Action {
+function setProducts(products: Product[], forUser?: boolean): Action {
   return {
     type: ACTION.SET_PRODUCTS,
-    payload: products,
+    payload: {
+      products: products,
+      forUser: forUser,
+    },
   };
 }
 
@@ -80,6 +88,20 @@ function selectCategory(category: Category): Action {
   return {
     type: ACTION.SELECT_CATEGORY,
     payload: category,
+  };
+}
+
+function getDemands(id?: string): Action {
+  return {
+    type: ACTION.GET_DEMANDS,
+    payload: id,
+  };
+}
+
+function setDemands(demands: Demand[]): Action {
+  return {
+    type: ACTION.SET_DEMANDS,
+    payload: demands,
   };
 }
 
@@ -93,6 +115,9 @@ const catalogAC = {
   setCategories: setCategories,
   setProducts: setProducts,
   selectCategory: selectCategory,
+
+  getDemands: getDemands,
+  setDemands: setDemands,
 };
 
 export default catalogAC;

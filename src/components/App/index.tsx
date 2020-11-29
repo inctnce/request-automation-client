@@ -7,6 +7,7 @@ import Header from "../Header/container";
 import style from "./style.module.css";
 import Collapse from "@material-ui/core/Collapse";
 import AlertTitle from "@material-ui/lab/AlertTitle/AlertTitle";
+import Category from "../../types/Category";
 
 type Props = {
   isAuth: boolean;
@@ -17,9 +18,11 @@ type Props = {
 
   didGetCategories: boolean;
   getCategories: () => void;
+  selectCategory: (category: Category) => void;
 
   didGetProducts: boolean;
-  getProducts: () => void;
+  firstCategory?: Category;
+  getProducts: (key: string, id: string) => void;
 
   cleanAlert: () => void;
 };
@@ -33,15 +36,10 @@ function App(props: Props) {
 
       return () => clearTimeout(interval);
     }
-  }, [props.isAlert]);
+  }, [props, props.isAlert]);
 
   if (props.isAuth) {
-    if (!props.didGetCategories) {
-      props.getCategories();
-    }
-    if (!props.didGetProducts) {
-      props.getProducts();
-    }
+    if (!props.didGetCategories) props.getCategories();
   }
 
   return (
@@ -52,11 +50,7 @@ function App(props: Props) {
 
           <Collapse in={props.isAlert}>
             <Alert className={style.alert} severity={props.alert.severity}>
-              {props.alert.title ? (
-                <AlertTitle>{props.alert.title}</AlertTitle>
-              ) : (
-                <></>
-              )}
+              {props.alert.title ? <AlertTitle>{props.alert.title}</AlertTitle> : <></>}
               {props.alert.message}
             </Alert>
           </Collapse>

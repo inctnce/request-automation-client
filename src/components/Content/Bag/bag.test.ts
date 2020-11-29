@@ -10,7 +10,7 @@ const product1: Product = {
   id: "some id",
   name: "some name",
   specs: ["1", "2"],
-  values: ["2", "4"],
+  settings: ["2", "4"],
   price: "1234",
   extra_info: "",
   category_id: "some id",
@@ -21,7 +21,7 @@ const product2: Product = {
   id: "some id",
   name: "another name",
   specs: ["1", "2"],
-  values: ["2", "4"],
+  settings: ["2", "4"],
   price: "1234",
   extra_info: "",
   category_id: "some id",
@@ -44,7 +44,7 @@ const demand: Demand = {
 const invalid_string_1 = "";
 const invalid_string_2 = " ";
 
-const invalid_number = 0;
+const invalid_number = "0";
 
 test("adding demand with invalid name", () => {
   expect(postDemand({ ...demand, name: invalid_string_1 }, funcAlias)).toBe(

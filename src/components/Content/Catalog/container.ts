@@ -13,6 +13,7 @@ function mapStateToProps(state: CombinedState<{ catalog: CatalogPage }>) {
   return {
     didGetCategories: state.catalog.didGetCategories,
     didGetProducts: state.catalog.didGetProducts,
+    needLoadUpProduct: state.catalog.needLoadUpProducts,
 
     selected_category: state.catalog.selected_category!,
     categories: state.catalog.categories,
@@ -33,6 +34,10 @@ function mapDispatchToProps(dispatch: (action: Action) => void) {
     },
     selectCategory: (category: Category) => {
       dispatch(catalogAC.selectCategory(category));
+    },
+
+    getProducts: (key: string, id: string) => {
+      dispatch(catalogAC.getProducts(key, id));
     },
   };
 }

@@ -1,24 +1,18 @@
 import React from "react";
 import style from "./style.module.css";
-import DemandForm from "./DemandForm";
-import Demand from "../../../types/Demand";
+import DemandForm from "./DemandForm/container";
 import Product from "../../../types/Product";
 import ProductCard from "../../Reusable/ProductCard";
 
 type Props = {
-  demand: Demand;
+  products: Product[];
 
   removeFromBag: (product: Product) => void;
 };
 
 const Bag = (props: Props) => {
-  const products = props.demand.products.map((product: Product, i: number) => (
-    <ProductCard
-      key={i}
-      product={product}
-      segment="bag"
-      buttonAction={props.removeFromBag}
-    />
+  const products = props.products.map((product: Product, i: number) => (
+    <ProductCard key={i} product={product} segment="bag" buttonAction={props.removeFromBag} />
   ));
 
   return (

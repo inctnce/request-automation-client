@@ -1,4 +1,6 @@
 import Category from "../Category";
+import Demand from "../Demand";
+import Product from "../Product";
 import Specification from "../Specification";
 
 type ProductForm = {
@@ -11,8 +13,13 @@ type ProductForm = {
 
 type AccountPage = {
   selected_option: number;
-
   product_form: ProductForm;
+
+  didGetUserProducts: boolean;
+  user_products: Product[];
+
+  didGetUserDemands: boolean;
+  user_demands: Demand[];
 };
 
 export default AccountPage;

@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import { CombinedState } from "redux";
 import Option from ".";
+import catalogAC from "../../../../store/actionCreators/catalog";
 import Action from "../../../../types/Action";
 import AccountPage from "../../../../types/pages/AccountPage";
 import AppPage from "../../../../types/pages/AppPage";
@@ -20,14 +21,24 @@ function mapStateToProps(
     categories: state.catalog.categories.filter((currentValue) => {
       return currentValue.creator_id === state.app.user?.id;
     }),
-    products: state.catalog.products.filter((currentValue) => {
-      return currentValue.creator_id === state.app.user?.id;
-    }),
+
+    didGetProducts: state.account.didGetUserProducts,
+    products: state.account.user_products,
+
+    didGetDemands: state.account.didGetUserDemands,
+    demands: state.account.user_demands,
   };
 }
 
 function mapDispatchToProps(dispatch: (action: Action) => void) {
-  return {};
+  return {
+    getProducts: (key: string, id: string) => {
+      dispatch(catalogAC.getProducts(key, id));
+    },
+    getDemands: (id?: string) => {
+      dispatch(catalogAC.getDemands(id));
+    },
+  };
 }
 
 const OptionContainer = connect(mapStateToProps, mapDispatchToProps)(Option);

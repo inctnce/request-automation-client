@@ -21,7 +21,7 @@ const Account = (props: Props) => {
             <List>
               <MyListItem
                 isSelected={props.selected_option === 0 ? true : false}
-                label="История"
+                label="История заявок"
                 onClick={() => props.setOption(0)}
               />
               <MyListItem
