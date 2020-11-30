@@ -22,6 +22,7 @@ import watchGetCategories from "./sagas/category/get";
 import watchPostProduct from "./sagas/product/post";
 import watchGetProducts from "./sagas/product/get";
 import watchPostDemand from "./sagas/demand/post";
+import watchGetDemands from "./sagas/demand/get";
 
 const reducers = combineReducers({
   app: app,
@@ -50,5 +51,6 @@ saga.run(watchGetCategories);
 saga.run(watchPostProduct);
 saga.run(watchGetProducts);
 saga.run(watchPostDemand);
+saga.run(watchGetDemands);
 
 export default store;

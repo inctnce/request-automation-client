@@ -35,11 +35,11 @@ const Option = (props: Props) => {
   if (props.selected_option === 0) {
     return (
       <div className={style.wrapper}>
-        {/* <History
+        <History
           items={props.demands.filter((currentValue) => {
             return currentValue.creator_id === props.creator_id;
           })}
-        /> */}
+        />
       </div>
     );
   }

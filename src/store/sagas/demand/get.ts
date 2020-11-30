@@ -28,8 +28,12 @@ async function getDemands(id: string) {
 function* workerGetDemands(action: Action) {
   const data = yield call(getDemands, action.payload);
 
+  for (let i = 0; i < data.length; i++) {
+    data[i].products = JSON.parse(data[i].products);
+  }
+
   if (data !== undefined) {
-    yield put(catalogAC.setCategories(data));
+    yield put(catalogAC.setDemands(data));
     return;
   }
   yield put(appAC.setAlert({ message: "Ошибка получения заявок", severity: "error" }));

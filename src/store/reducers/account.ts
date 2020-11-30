@@ -72,6 +72,13 @@ function account(state: AccountPage = initialState, action: Action): AccountPage
         didGetUserProducts: action.payload.forUser ? true : false,
         user_products: action.payload.forUser ? [...action.payload.products] : state.user_products,
       };
+
+    case ACTION.SET_DEMANDS:
+      return {
+        ...state,
+        didGetUserDemands: true,
+        user_demands: [...action.payload],
+      };
   }
   return state;
 }
