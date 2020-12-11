@@ -13,7 +13,7 @@ function mapStateToProps(state: CombinedState<{ app: AppPage; catalog: CatalogPa
   return {
     isAuth: state.app.isAuth,
     isAdmin: state.app.isAdmin,
-    refreshToken: state.app.user!.refreshToken!,
+    refreshToken: state.app.user ? state.app.user!.refreshToken! : undefined,
 
     didGetCategories: state.catalog.didGetCategories,
 

@@ -12,7 +12,7 @@ import Category from "../../types/Category";
 type Props = {
   isAuth: boolean;
   isAdmin: boolean;
-  refreshToken: string;
+  refreshToken?: string;
 
   isAlert: boolean;
   alert: AlertT;
@@ -33,7 +33,7 @@ type Props = {
 function App(props: Props) {
   React.useEffect(() => {
     const refreshTokenInterval = setInterval(() => {
-      props.updateToken(props.refreshToken);
+      props.updateToken(props.refreshToken!);
     }, 600000);
 
     return () => clearInterval(refreshTokenInterval);
