@@ -21,9 +21,8 @@ type Props = {
   getCategories: () => void;
   selectCategory: (category: Category) => void;
 
-  didGetProducts: boolean;
+ 
   firstCategory?: Category;
-  getProducts: (key: string, id: string) => void;
 
   cleanAlert: () => void;
 
@@ -32,11 +31,15 @@ type Props = {
 
 function App(props: Props) {
   React.useEffect(() => {
-    const refreshTokenInterval = setInterval(() => {
+    if (props.refreshToken) {
       props.updateToken(props.refreshToken!);
-    }, 600000);
 
-    return () => clearInterval(refreshTokenInterval);
+      const refreshTokenInterval = setInterval(() => {
+        props.updateToken(props.refreshToken!);
+      }, 500000);
+
+      return () => clearInterval(refreshTokenInterval);
+    }
   });
 
   React.useEffect(() => {

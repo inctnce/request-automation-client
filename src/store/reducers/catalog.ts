@@ -22,7 +22,7 @@ function catalog(state: CatalogPage = initialState, action: Action): CatalogPage
     case ACTION.SET_PRODUCTS:
       return {
         ...state,
-        didGetProducts: true,
+        needLoadUpProducts: false,
         products: action.payload.forUser ? state.products : [...state.products, ...action.payload.products],
       };
     case ACTION.SET_PRODUCT:
@@ -44,6 +44,14 @@ function catalog(state: CatalogPage = initialState, action: Action): CatalogPage
         selected_category: action.payload,
         selected_categories: didFind ? state.selected_categories : [action.payload.id, ...state.selected_categories],
         needLoadUpProducts: !didFind,
+      };
+
+    case ACTION.LOGOUT:
+      return {
+        ...state,
+        categories: [],
+        products: [],
+        selected_categories: [],
       };
   }
 

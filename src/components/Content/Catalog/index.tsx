@@ -10,8 +10,7 @@ import ProductCard from "../../Reusable/ProductCard";
 
 type Props = {
   didGetCategories: boolean;
-  didGetProducts: boolean;
-  needLoadUpProduct: boolean;
+  needLoadUpProducts: boolean;
 
   selected_category: Category;
   categories: Category[];
@@ -27,7 +26,8 @@ type Props = {
 
 const Catalog = (props: Props) => {
   React.useEffect(() => {
-    if (props.selected_category && props.needLoadUpProduct) {
+    console.log(props.needLoadUpProducts);
+    if (props.selected_category && props.needLoadUpProducts) {
       props.getProducts("category", props.selected_category.id!);
     }
   }, [props.selected_category]);
@@ -38,7 +38,7 @@ const Catalog = (props: Props) => {
 
   return (
     <div>
-      {props.didGetCategories || props.didGetProducts ? (
+      {props.didGetCategories || props.needLoadUpProducts ? (
         <>
           <h1>Каталог</h1>
           <div className={style.wrapper}>

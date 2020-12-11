@@ -18,7 +18,7 @@ function mapStateToProps(state: CombinedState<{ app: AppPage; catalog: CatalogPa
     didGetCategories: state.catalog.didGetCategories,
 
     category_id: state.catalog.categories.length > 0 ? state.catalog.categories[0].id : undefined,
-    didGetProducts: state.catalog.needLoadUpProducts,
+   
 
     isAlert: state.app.isAlert,
     alert: state.app.alert!,
@@ -33,10 +33,6 @@ function mapDispatchToProps(dispatch: (action: Action) => void) {
 
     selectCategory: (category: Category) => {
       dispatch(catalogAC.selectCategory(category));
-    },
-
-    getProducts: (key: string, id: string) => {
-      dispatch(catalogAC.getProducts(key, id));
     },
 
     cleanAlert: () => {

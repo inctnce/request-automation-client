@@ -12,8 +12,7 @@ import Product from "../../../types/Product";
 function mapStateToProps(state: CombinedState<{ catalog: CatalogPage }>) {
   return {
     didGetCategories: state.catalog.didGetCategories,
-    didGetProducts: state.catalog.didGetProducts,
-    needLoadUpProduct: state.catalog.needLoadUpProducts,
+    needLoadUpProducts: state.catalog.needLoadUpProducts,
 
     selected_category: state.catalog.selected_category!,
     categories: state.catalog.categories,
