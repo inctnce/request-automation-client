@@ -5,6 +5,8 @@ import style from "./style.module.css";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Demand from "../../../../types/Demand";
+import postDemand from "../helpers";
+import Alert from "../../../../types/Alert";
 
 type Props = {
   demand: Demand;
@@ -12,6 +14,8 @@ type Props = {
 
   postDemand: (demand: Demand) => void;
   updForm: (key: number, value: string) => void;
+
+  alert: (alert: Alert) => void;
 };
 
 const DemandForm = (props: Props) => {
@@ -83,19 +87,7 @@ const DemandForm = (props: Props) => {
           variant="contained"
           color="primary"
           disableElevation
-          onClick={() =>
-            props.postDemand({
-              name: props.demand.name,
-              total_cost: props.demand.total_cost,
-              deadlines: props.demand.deadlines,
-              address: props.demand.address,
-              financing_source: props.demand.financing_source,
-              contact_person: props.demand.contact_person,
-              responsible_person: props.demand.responsible_person,
-              products: props.demand.products,
-              creator_id: props.creator_id,
-            })
-          }
+          onClick={() => postDemand(props.demand, props.postDemand, props.alert)}
         >
           Отправить
         </Button>

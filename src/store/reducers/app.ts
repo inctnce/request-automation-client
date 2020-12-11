@@ -22,6 +22,7 @@ function app(state: AppPage = initialState, action: Action): AppPage {
       userLS.remove();
       return {
         ...state,
+        user: undefined,
       };
 
     case ACTION.SET_ACCESS_TOKEN:
