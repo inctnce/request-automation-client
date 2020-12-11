@@ -1,10 +1,9 @@
-import Category from "../Category";
 import Demand from "../Demand";
 import Product from "../Product";
 import Specification from "../Specification";
 
 type ProductForm = {
-  selected_category?: Category;
+  selected_category_id?: "post" | "put";
   name: string;
   specs: Specification[];
   price: string;

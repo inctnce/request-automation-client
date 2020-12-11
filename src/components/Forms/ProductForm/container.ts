@@ -1,13 +1,12 @@
 import { CombinedState } from "redux";
-import Action from "../../../../../types/Action";
+import Action from "../../../types/Action";
 import ProductForm from ".";
 import { connect } from "react-redux";
-import AccountPage from "../../../../../types/pages/AccountPage";
-import CatalogPage from "../../../../../types/pages/CatalogPage";
-import Category from "../../../../../types/Category";
-import accountAC from "../../../../../store/actionCreators/account";
-import AppPage from "../../../../../types/pages/AppPage";
-import catalogAC from "../../../../../store/actionCreators/catalog";
+import AccountPage from "../../../types/pages/AccountPage";
+import CatalogPage from "../../../types/pages/CatalogPage";
+import accountAC from "../../../store/actionCreators/account";
+import AppPage from "../../../types/pages/AppPage";
+import catalogAC from "../../../store/actionCreators/catalog";
 
 function mapStateToProps(
   state: CombinedState<{
@@ -18,24 +17,24 @@ function mapStateToProps(
 ) {
   return {
     creator_id: state.app.user!.id,
+    request: "post",
 
-    selected_category: state.account.product_form?.selected_category!,
+    selected_category_id: state.account.product_form?.selected_category_id!,
     categories: state.catalog.categories,
 
     name: state.account.product_form.name,
     specs: state.account.product_form.specs,
     price: state.account.product_form.price,
     extra_info: state.account.product_form.extra_info,
+
+    formTitle: "Добавить товар",
+    submitBtnTitle: "Добавить",
   };
 }
 
 function mapDispatchToProps(dispatch: (action: Action) => void) {
   return {
-    updForm: (
-      segment: "category" | "table" | "other",
-      key: number,
-      value: string | Category
-    ) => {
+    updForm: (segment: "category" | "table" | "other", key: number, value: string) => {
       dispatch(accountAC.updProductForm(segment, key, value));
     },
 
@@ -56,24 +55,11 @@ function mapDispatchToProps(dispatch: (action: Action) => void) {
       creator_id: string,
       category_id: string
     ) => {
-      dispatch(
-        catalogAC.postProduct(
-          name,
-          specs,
-          values,
-          price,
-          extra_info,
-          creator_id,
-          category_id
-        )
-      );
+      dispatch(catalogAC.postProduct(name, specs, values, price, extra_info, creator_id, category_id));
     },
   };
 }
 
-const ProductFormContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProductForm);
+const ProductFormContainer = connect(mapStateToProps, mapDispatchToProps)(ProductForm);
 
 export default ProductFormContainer;

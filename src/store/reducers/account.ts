@@ -27,8 +27,8 @@ function account(state: AccountPage = initialState, action: Action): AccountPage
         ...state,
         product_form: {
           ...state.product_form,
-          selected_category:
-            action.payload.segment === "category" ? action.payload.value : state.product_form.selected_category,
+          selected_category_id:
+            action.payload.segment === "category" ? action.payload.value : state.product_form.selected_category_id,
           name:
             action.payload.segment === "other"
               ? action.payload.key === 0

@@ -4,9 +4,9 @@ import React from "react";
 import style from "./style.module.css";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Demand from "../../../../types/Demand";
-import postDemand from "../helpers";
-import Alert from "../../../../types/Alert";
+import Demand from "../../../types/Demand";
+import postDemand from "../../Content/Bag/helpers";
+import Alert from "../../../types/Alert";
 
 type Props = {
   demand: Demand;
@@ -14,6 +14,9 @@ type Props = {
 
   postDemand: (demand: Demand) => void;
   updForm: (key: number, value: string) => void;
+
+  formTitle: string;
+  submitBtnTitle: string;
 
   alert: (alert: Alert) => void;
 };
@@ -31,7 +34,7 @@ const DemandForm = (props: Props) => {
     <div>
       <Paper className={style.form}>
         <Typography className={style.item} align="center" variant="h6">
-          Отправление заявки
+          {props.formTitle}
         </Typography>
         <TextField
           onChange={() => props.updForm(0, nameRef.current!.value)}
@@ -89,7 +92,7 @@ const DemandForm = (props: Props) => {
           disableElevation
           onClick={() => postDemand(props.demand, props.postDemand, props.alert)}
         >
-          Отправить
+          {props.submitBtnTitle}
         </Button>
       </Paper>
     </div>

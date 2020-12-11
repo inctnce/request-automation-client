@@ -2,7 +2,7 @@ import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
-import Category from "../../../../../types/Category";
+import Category from "../../../types/Category";
 import style from "./style.module.css";
 import Button from "@material-ui/core/Button";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -17,24 +17,28 @@ import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import Add from "@material-ui/icons/Add";
 import Remove from "@material-ui/icons/Remove";
-import Specification from "../../../../../types/Specification";
+import Specification from "../../../types/Specification";
 import postProduct, { parseSpecs } from "./helpers";
 
 type Props = {
   creator_id: string;
 
-  selected_category: Category;
+  selected_category_id: string;
   categories: Category[];
 
   name: string;
   specs: Specification[];
   price: string;
   extra_info: string;
+  request: "post" | "put" | string;
+
+  formTitle: string;
+  submitBtnTitle: string;
 
   updNumOfRows: (action: "increase" | "decrease") => void;
 
   updTable: (type: "spec" | "value", index: number, value: string) => void;
-  updForm: (segment: "category" | "other", key: number, value: string | Category) => void;
+  updForm: (segment: "category" | "other", key: number, value: string) => void;
 
   postProduct: (
     name: string,
@@ -43,7 +47,8 @@ type Props = {
     price: string,
     extra_info: string,
     creator_id: string,
-    category_id: string
+    category_id: string,
+    request: "post" | "put" | string
   ) => void;
 };
 
@@ -51,7 +56,8 @@ const ProductForm = (props: Props) => {
   const [category, setCategory] = React.useState(props.categories[0].name || "");
 
   React.useEffect(() => {
-    props.updForm("category", 0, props.categories[0]);
+    if (props.request === "post") {
+    }
   }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,7 +67,7 @@ const ProductForm = (props: Props) => {
       return currentValue.name === event.target.value;
     });
 
-    props.updForm("category", 0, category!);
+    props.updForm("category", 0, category!.id!);
   };
 
   const nameRef: React.RefObject<HTMLInputElement> = React.createRef();
@@ -108,7 +114,7 @@ const ProductForm = (props: Props) => {
     <div>
       <Paper className={style.form} variant="outlined">
         <Typography className={style.item} align="center" variant="h6">
-          Добавить товар
+          {props.formTitle}
         </Typography>
 
         <TextField className={style.item} required select label="Категория" value={category} onChange={handleChange}>
@@ -180,12 +186,13 @@ const ProductForm = (props: Props) => {
               props.price,
               props.extra_info,
               props.creator_id,
-              props.selected_category.id!,
+              props.selected_category_id,
+              props.request,
               props.postProduct
             )
           }
         >
-          Добавить
+          {props.submitBtnTitle}
         </Button>
       </Paper>
     </div>

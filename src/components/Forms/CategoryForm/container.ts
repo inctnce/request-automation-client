@@ -1,11 +1,11 @@
 import { connect } from "react-redux";
 import { CombinedState } from "redux";
 import CategoryForm from ".";
-import appAC from "../../../../../store/actionCreators/app";
-import catalogAC from "../../../../../store/actionCreators/catalog";
-import Action from "../../../../../types/Action";
-import Alert from "../../../../../types/Alert";
-import AppPage from "../../../../../types/pages/AppPage";
+import appAC from "../../../store/actionCreators/app";
+import catalogAC from "../../../store/actionCreators/catalog";
+import Action from "../../../types/Action";
+import Alert from "../../../types/Alert";
+import AppPage from "../../../types/pages/AppPage";
 
 function mapStateToProps(
   state: CombinedState<{
@@ -13,7 +13,7 @@ function mapStateToProps(
   }>
 ) {
   return {
-    user_id: state.app.user!.id,
+    creator_id: state.app.user!.id,
   };
 }
 

@@ -1,9 +1,6 @@
-import Specification from "../../../../../types/Specification";
+import Specification from "../../../types/Specification";
 
-export function parseSpecs(
-  parse: "specs" | "values",
-  specs: Specification[]
-): string[] {
+export function parseSpecs(parse: "specs" | "values", specs: Specification[]): string[] {
   const result: string[] = [];
   if (parse === "specs") {
     specs.forEach((spec: Specification) => {
@@ -25,6 +22,7 @@ export default function postProduct(
   extra_info: string,
   creator_id: string,
   category_id: string,
+  request: "post" | "put" | string,
   post: (
     name: string,
     specs: string[],
@@ -32,7 +30,8 @@ export default function postProduct(
     price: string,
     extra_info: string,
     creator_id: string,
-    category_id: string
+    category_id: string,
+    request: "post" | "put" | string
   ) => void
 ) {
   if (name.trim() === "" || name === undefined) {
@@ -55,5 +54,5 @@ export default function postProduct(
     console.log("creator_id error");
     return "error";
   }
-  post(name, specs, values, price, extra_info, creator_id, category_id);
+  post(name, specs, values, price, extra_info, creator_id, category_id, request);
 }

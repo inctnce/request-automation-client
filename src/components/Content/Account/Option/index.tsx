@@ -1,9 +1,9 @@
 import React from "react";
 import style from "./style.module.css";
 
-import CategoryForm from "./CategoryForm/container";
+import CategoryForm from "../../../Forms/CategoryForm/container";
 import History from "./History";
-import ProductForm from "./ProductForm/container";
+import ProductForm from "../../../Forms/ProductForm/container";
 import Category from "../../../../types/Category";
 import Product from "../../../../types/Product";
 import Demand from "../../../../types/Demand";
@@ -35,11 +35,7 @@ const Option = (props: Props) => {
   if (props.selected_option === 0) {
     return (
       <div className={style.wrapper}>
-        <History
-          items={props.demands.filter((currentValue) => {
-            return currentValue.creator_id === props.creator_id;
-          })}
-        />
+        <History itemsType="demand" items={props.demands} request="put" categories={props.categories} />
       </div>
     );
   }
@@ -47,11 +43,7 @@ const Option = (props: Props) => {
     return (
       <div className={style.wrapper}>
         <CategoryForm />
-        <History
-          items={props.categories.filter((currentValue) => {
-            return currentValue.creator_id === props.creator_id;
-          })}
-        />
+        <History itemsType="category" items={props.categories} request="put" categories={props.categories} />
       </div>
     );
   }
@@ -60,6 +52,9 @@ const Option = (props: Props) => {
       <div className={style.wrapper}>
         <ProductForm />
         <History
+          request="put"
+          itemsType="product"
+          categories={props.categories}
           items={props.products.filter((currentValue) => {
             return currentValue.creator_id === props.creator_id;
           })}

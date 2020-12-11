@@ -1,4 +1,4 @@
-import Alert from "../../../../../types/Alert";
+import Alert from "../../../types/Alert";
 import postCategory from "./helpers";
 
 function funcAlias(): void {

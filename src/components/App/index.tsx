@@ -34,7 +34,7 @@ function App(props: Props) {
 
       const refreshTokenInterval = setInterval(() => {
         props.updateToken(props.user!.refreshToken!);
-      }, 600001);
+      }, 1200005);
 
       return () => clearInterval(refreshTokenInterval);
     }

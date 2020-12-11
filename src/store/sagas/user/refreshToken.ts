@@ -1,6 +1,5 @@
 import Axios from "axios";
 import { call, put, takeEvery } from "redux-saga/effects";
-import Action from "../../../types/Action";
 import authAC from "../../actionCreators/auth";
 import ACTION from "../../ACTION";
 import userLS from "../../../localStorage/user";
@@ -23,8 +22,8 @@ async function refreshToken(token: string) {
     });
 }
 
-function* workerRefreshToken(action: Action) {
-  const data = yield call(refreshToken, action.payload);
+function* workerRefreshToken() {
+  const data = yield call(refreshToken, userLS.get()!.refreshToken!);
 
   if (data !== undefined) {
     yield put(authAC.setAccessToken(data));

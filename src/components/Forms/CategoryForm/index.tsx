@@ -6,10 +6,10 @@ import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import postCategory from "./helpers";
-import Alert from "../../../../../types/Alert";
+import Alert from "../../../types/Alert";
 
 type Props = {
-  user_id: string;
+  creator_id: string;
   postCategory: (user_id: string, name: string) => void;
   alert: (alert: Alert) => void;
 };
@@ -24,26 +24,13 @@ const CategoryForm = (props: Props) => {
           Добавить категорию
         </Typography>
 
-        <TextField
-          className={style.item}
-          required
-          inputRef={categoryRef}
-          label="Название"
-          margin="normal"
-        />
+        <TextField className={style.item} required inputRef={categoryRef} label="Название" margin="normal" />
         <Button
           className={style.item}
           variant="contained"
           color="primary"
           disableElevation
-          onClick={() =>
-            postCategory(
-              props.user_id,
-              categoryRef.current!.value,
-              props.postCategory,
-              props.alert
-            )
-          }
+          onClick={() => postCategory(props.creator_id, categoryRef.current!.value, props.postCategory, props.alert)}
         >
           Добавить
         </Button>

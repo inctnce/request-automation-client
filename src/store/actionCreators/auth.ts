@@ -32,10 +32,9 @@ function setUser(user: User): Action {
   return { type: ACTION.SET_USER, payload: user };
 }
 
-function refreshToken(token: string): Action {
+function refreshToken(): Action {
   return {
     type: ACTION.REFRESH_TOKEN,
-    payload: token,
   };
 }
 

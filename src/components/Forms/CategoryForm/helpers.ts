@@ -1,4 +1,4 @@
-import Alert from "../../../../../types/Alert";
+import Alert from "../../../types/Alert";
 
 export default function postCategory(
   user_id: string,

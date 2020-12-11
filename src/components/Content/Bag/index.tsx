@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./style.module.css";
-import DemandForm from "./DemandForm/container";
+import DemandForm from "../../Forms/DemandForm/container";
 import Product from "../../../types/Product";
 import ProductCard from "../../Reusable/ProductCard";
 

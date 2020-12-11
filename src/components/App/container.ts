@@ -36,8 +36,8 @@ function mapDispatchToProps(dispatch: (action: Action) => void) {
       dispatch(appAC.cleanAlert());
     },
 
-    updateToken: (token: string) => {
-      dispatch(authAC.updateToken(token));
+    updateToken: () => {
+      dispatch(authAC.updateToken());
     },
   };
 }
