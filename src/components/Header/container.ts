@@ -8,6 +8,8 @@ import AppPage from "../../types/pages/AppPage";
 
 function mapStateToProps(state: CombinedState<{ app: AppPage; header: Header }>) {
   return {
+    isAdmin: state.app.user!.isAdmin,
+    
     filter_value: state.header.filter_value,
   };
 }

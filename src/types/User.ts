@@ -6,6 +6,7 @@ type User = {
   creation_date: Date;
   canAddCategory: boolean;
   canAddProduct: boolean;
+  isAdmin: boolean;
   accessToken?: string;
   refreshToken?: string;
 };

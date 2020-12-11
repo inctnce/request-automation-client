@@ -9,7 +9,7 @@ import { CircularProgress } from "@material-ui/core";
 
 type Props = {
   isAuth: boolean;
-  didSetUser: boolean;
+
   email_val: string;
   password_val: string;
 
@@ -27,7 +27,7 @@ const Login = (props: Props) => {
         <Redirect to="/" />
       ) : (
         <>
-          {props.didSetUser ? (
+          {props.isAuth ? (
             <div className={style.container}>
               <CircularProgress />
             </div>

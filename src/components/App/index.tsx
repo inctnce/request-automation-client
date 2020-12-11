@@ -8,11 +8,10 @@ import style from "./style.module.css";
 import Collapse from "@material-ui/core/Collapse";
 import AlertTitle from "@material-ui/lab/AlertTitle/AlertTitle";
 import Category from "../../types/Category";
+import User from "../../types/User";
 
 type Props = {
-  isAuth: boolean;
-  isAdmin: boolean;
-  refreshToken?: string;
+  user: User | undefined;
 
   isAlert: boolean;
   alert: AlertT;
@@ -21,7 +20,6 @@ type Props = {
   getCategories: () => void;
   selectCategory: (category: Category) => void;
 
- 
   firstCategory?: Category;
 
   cleanAlert: () => void;
@@ -31,11 +29,11 @@ type Props = {
 
 function App(props: Props) {
   React.useEffect(() => {
-    if (props.refreshToken) {
-      props.updateToken(props.refreshToken!);
+    if (props.user) {
+      props.updateToken(props.user.refreshToken!);
 
       const refreshTokenInterval = setInterval(() => {
-        props.updateToken(props.refreshToken!);
+        props.updateToken(props.user!.refreshToken!);
       }, 500000);
 
       return () => clearInterval(refreshTokenInterval);
@@ -52,13 +50,13 @@ function App(props: Props) {
     }
   }, [props, props.isAlert]);
 
-  if (props.isAuth) {
+  if (props.user) {
     if (!props.didGetCategories) props.getCategories();
   }
 
   return (
     <>
-      {props.isAuth ? (
+      {props.user ? (
         <div className={style.wrapper}>
           <Header />
 
@@ -68,6 +66,7 @@ function App(props: Props) {
               {props.alert.message}
             </Alert>
           </Collapse>
+
           <Content />
         </div>
       ) : (

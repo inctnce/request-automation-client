@@ -9,8 +9,8 @@ import LoginPage from "../../types/pages/LoginPage";
 
 function mapStateToProps(state: CombinedState<{ app: AppPage; login: LoginPage }>) {
   return {
-    didSetUser: state.app.didSetUser,
-    isAuth: state.app.isAuth,
+    isAuth: state.app.user ? true : false,
+
     email_val: state.login.email_val,
     password_val: state.login.password_val,
   };

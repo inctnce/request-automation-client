@@ -44,6 +44,8 @@ const useStyles = makeStyles((_theme: Theme) =>
 );
 
 type Props = {
+  isAdmin: boolean;
+
   filter_value: string;
   updFilter: (value: string) => void;
   logout: () => void;
@@ -71,97 +73,79 @@ const Header = (props: Props) => {
   }
 
   return (
-    <AppBar
-      className={classes.headerRoot}
-      elevation={0}
-      position="static"
-      color="transparent"
-    >
+    <AppBar className={classes.headerRoot} elevation={0} position="static" color="transparent">
       <Toolbar className={classes.toolbarRoot}>
-        <Search
-          className={style.search}
-          value={props.filter_value}
-          updFilter={props.updFilter}
-        />
-        {window.innerWidth > 600 ? (
+        {!props.isAdmin ? (
           <>
-            <span className={classes.optionsRoot}>
-              <HeaderLink label="Каталог" url="/" />
-              <HeaderLink label="Аккаунт" url="/account" />
-              <HeaderLink label="Корзина" url="/bag" />
-            </span>
-            <Button
-              color="primary"
-              variant="contained"
-              disableElevation
-              onClick={() => props.logout()}
-            >
-              Выйти
-            </Button>
+            <Search className={style.search} value={props.filter_value} updFilter={props.updFilter} />
+            {window.innerWidth > 600 ? (
+              <>
+                <span className={classes.optionsRoot}>
+                  <HeaderLink label="Каталог" url="/" />
+                  <HeaderLink label="Аккаунт" url="/account" />
+                  <HeaderLink label="Корзина" url="/bag" />
+                </span>
+                <Button color="primary" variant="contained" disableElevation onClick={() => props.logout()}>
+                  Выйти
+                </Button>
+              </>
+            ) : (
+              <div className={style.more_btn}>
+                <IconButton className={style.more_btn} aria-haspopup="true" onClick={handleClick}>
+                  <MoreVert />
+                </IconButton>
+
+                <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+                  <MenuItem
+                    onClick={() => {
+                      setAnchorEl(null);
+                      history.push("/");
+                    }}
+                  >
+                    <ListItemIcon>
+                      <Dashboard fontSize="small" />
+                    </ListItemIcon>
+                    <Typography variant="inherit">Каталог</Typography>
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      setAnchorEl(null);
+                      history.push("/account");
+                    }}
+                  >
+                    <ListItemIcon>
+                      <AccountCircle fontSize="small" />
+                    </ListItemIcon>
+                    <Typography variant="inherit">Аккаунт</Typography>
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      setAnchorEl(null);
+                      history.push("/bag");
+                    }}
+                  >
+                    <ListItemIcon>
+                      <ShoppingBasket fontSize="small" />
+                    </ListItemIcon>
+                    <Typography variant="inherit">Корзина</Typography>
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      setAnchorEl(null);
+                      props.logout();
+                    }}
+                  >
+                    <ListItemIcon>
+                      <ExitToApp fontSize="small" />
+                    </ListItemIcon>
+                    <Typography variant="inherit">Выйти</Typography>
+                  </MenuItem>
+                </Menu>
+              </div>
+            )}
           </>
         ) : (
-          <div className={style.more_btn}>
-            <IconButton
-              className={style.more_btn}
-              aria-haspopup="true"
-              onClick={handleClick}
-            >
-              <MoreVert />
-            </IconButton>
-           
-            <Menu
-              id="simple-menu"
-              anchorEl={anchorEl}
-              keepMounted
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-            >
-              <MenuItem
-                onClick={() => {
-                  setAnchorEl(null);
-                  history.push("/");
-                }}
-              >
-                <ListItemIcon>
-                  <Dashboard fontSize="small" />
-                </ListItemIcon>
-                <Typography variant="inherit">Каталог</Typography>
-              </MenuItem>
-              <MenuItem
-                onClick={() => {
-                  setAnchorEl(null);
-                  history.push("/account");
-                }}
-              >
-                <ListItemIcon>
-                  <AccountCircle fontSize="small" />
-                </ListItemIcon>
-                <Typography variant="inherit">Аккаунт</Typography>
-              </MenuItem>
-              <MenuItem
-                onClick={() => {
-                  setAnchorEl(null);
-                  history.push("/bag");
-                }}
-              >
-                <ListItemIcon>
-                  <ShoppingBasket fontSize="small" />
-                </ListItemIcon>
-                <Typography variant="inherit">Корзина</Typography>
-              </MenuItem>
-              <MenuItem
-                onClick={() => {
-                  setAnchorEl(null);
-                  props.logout();
-                }}
-              >
-                <ListItemIcon>
-                  <ExitToApp fontSize="small" />
-                </ListItemIcon>
-                <Typography variant="inherit">Выйти</Typography>
-              </MenuItem>
-            </Menu>
-          </div>
+          <></>
         )}
       </Toolbar>
     </AppBar>

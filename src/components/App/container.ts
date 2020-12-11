@@ -11,14 +11,11 @@ import CatalogPage from "../../types/pages/CatalogPage";
 
 function mapStateToProps(state: CombinedState<{ app: AppPage; catalog: CatalogPage }>) {
   return {
-    isAuth: state.app.isAuth,
-    isAdmin: state.app.isAdmin,
-    refreshToken: state.app.user ? state.app.user!.refreshToken! : undefined,
+    user: state.app.user ? state.app.user! : undefined,
 
     didGetCategories: state.catalog.didGetCategories,
 
     category_id: state.catalog.categories.length > 0 ? state.catalog.categories[0].id : undefined,
-   
 
     isAlert: state.app.isAlert,
     alert: state.app.alert!,
