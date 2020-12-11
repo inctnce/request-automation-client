@@ -32,10 +32,14 @@ type Props = {
 
 function App(props: Props) {
   React.useEffect(() => {
-    const tokenTimeout = setTimeout(() => {
+    const refreshTokenInterval = setInterval(() => {
       props.updateToken(props.refreshToken);
-    });
+    }, 600000);
 
+    return () => clearInterval(refreshTokenInterval);
+  });
+
+  React.useEffect(() => {
     if (props.isAlert) {
       const timeout = setTimeout(() => {
         props.cleanAlert();
@@ -43,8 +47,6 @@ function App(props: Props) {
 
       return () => clearTimeout(timeout);
     }
-
-    return () => tokenTimeout;
   }, [props, props.isAlert]);
 
   if (props.isAuth) {
