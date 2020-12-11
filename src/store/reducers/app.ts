@@ -4,12 +4,12 @@ import AppPage from "../../types/pages/AppPage";
 import ACTION from "../ACTION";
 import userLS from "../../localStorage/user";
 import authLS from "../../localStorage/auth";
-import didSetUserLS from "../../localStorage/didSetUser";
+import User from "../../types/User";
 
 function app(state: AppPage = initialState, action: Action): AppPage {
   switch (action.type) {
     case ACTION.DID_SET_USER:
-      didSetUserLS.set();
+      authLS.set();
       return {
         ...state,
         didSetUser: true,
@@ -26,12 +26,21 @@ function app(state: AppPage = initialState, action: Action): AppPage {
     case ACTION.LOGOUT:
       userLS.remove();
       authLS.remove();
-      didSetUserLS.remove();
       return {
         ...state,
         isAuth: false,
         didSetUser: false,
       };
+
+    case ACTION.SET_ACCESS_TOKEN:
+      const user: User = userLS.get()!;
+      user!.accessToken = action.payload;
+      userLS.set(user);
+      return {
+        ...state,
+        user: { ...user },
+      };
+
     case ACTION.ALERT:
       return {
         ...state,

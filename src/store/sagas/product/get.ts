@@ -1,6 +1,6 @@
 import Axios from "axios";
-import { act } from "react-dom/test-utils";
 import { call, put, takeLatest } from "redux-saga/effects";
+import userLS from "../../../localStorage/user";
 import Action from "../../../types/Action";
 import ACTION from "../../ACTION";
 import catalogAC from "../../actionCreators/catalog";
@@ -13,7 +13,11 @@ function formulateRequest(key?: string, id?: string): string {
 }
 
 async function getProducts(key?: string, id?: string) {
-  return await Axios.get(formulateRequest(key, id))
+  return await Axios.get(formulateRequest(key, id), {
+    headers: {
+      Authorization: "Bearer " + userLS.get()?.accessToken, //the token is a variable which holds the token
+    },
+  })
     .then((response) => {
       if (response.status === 200) {
         return response.data;

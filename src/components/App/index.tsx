@@ -12,6 +12,7 @@ import Category from "../../types/Category";
 type Props = {
   isAuth: boolean;
   isAdmin: boolean;
+  refreshToken: string;
 
   isAlert: boolean;
   alert: AlertT;
@@ -25,17 +26,25 @@ type Props = {
   getProducts: (key: string, id: string) => void;
 
   cleanAlert: () => void;
+
+  updateToken: (refreshToken: string) => void;
 };
 
 function App(props: Props) {
   React.useEffect(() => {
+    const tokenTimeout = setTimeout(() => {
+      props.updateToken(props.refreshToken);
+    });
+
     if (props.isAlert) {
-      const interval = setTimeout(() => {
+      const timeout = setTimeout(() => {
         props.cleanAlert();
       }, 3000);
 
-      return () => clearTimeout(interval);
+      return () => clearTimeout(timeout);
     }
+
+    return () => tokenTimeout;
   }, [props, props.isAlert]);
 
   if (props.isAuth) {

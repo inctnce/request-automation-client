@@ -3,14 +3,14 @@ import { call, put, takeEvery } from "redux-saga/effects";
 import Action from "../../../types/Action";
 import authAC from "../../actionCreators/auth";
 import ACTION from "../../ACTION";
+import userLS from "../../../localStorage/user";
 
-async function login(email: string, password: string) {
-  const data = {
-    email: email,
-    password: password,
-  };
-
-  return await Axios.post("https://request-automation-api.herokuapp.com/users/login", data)
+async function refreshToken(token: string) {
+  return await Axios.post("https://request-automation-api.herokuapp.com/users/login", token, {
+    headers: {
+      Authorization: "Bearer " + userLS.get()?.accessToken,
+    },
+  })
     .then((response) => {
       if (response.status === 200) {
         return response.data;
@@ -23,16 +23,16 @@ async function login(email: string, password: string) {
     });
 }
 
-function* workerLogin(action: Action) {
-  const data = yield call(login, action.payload.email, action.payload.password);
+function* workerRefreshToken(action: Action) {
+  const data = yield call(refreshToken, action.payload);
 
   if (data !== undefined) {
-    yield put(authAC.setUser(data));
+    yield put(authAC.setAccessToken(data));
   }
 }
 
 function* watchLogin() {
-  yield takeEvery(ACTION.LOGIN, workerLogin);
+  yield takeEvery(ACTION.REFRESH_TOKEN, workerRefreshToken);
 }
 
 export default watchLogin;

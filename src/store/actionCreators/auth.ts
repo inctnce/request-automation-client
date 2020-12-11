@@ -22,8 +22,28 @@ function login(email: string, password: string): Action {
   };
 }
 
+function logout(): Action {
+  return {
+    type: ACTION.LOGOUT,
+  };
+}
+
 function setUser(user: User): Action {
   return { type: ACTION.SET_USER, payload: user };
+}
+
+function refreshToken(token: string): Action {
+  return {
+    type: ACTION.REFRESH_TOKEN,
+    payload: token,
+  };
+}
+
+function setAccessToken(token: string): Action {
+  return {
+    type: ACTION.SET_ACCESS_TOKEN,
+    payload: token,
+  };
 }
 
 function handleLoginButton(): Action {
@@ -32,11 +52,17 @@ function handleLoginButton(): Action {
   };
 }
 
-const loginAC = {
+const authAC = {
   updForm: updForm,
+
   login: login,
+  logout: logout,
+
   setUser: setUser,
+  updateToken: refreshToken,
+  setAccessToken: setAccessToken,
+
   handleLoginButton: handleLoginButton,
 };
 
-export default loginAC;
+export default authAC;

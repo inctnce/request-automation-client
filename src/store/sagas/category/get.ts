@@ -1,11 +1,16 @@
 import Axios from "axios";
 import { call, put, takeLatest } from "redux-saga/effects";
+import userLS from "../../../localStorage/user";
 import ACTION from "../../ACTION";
 import appAC from "../../actionCreators/app";
 import catalogAC from "../../actionCreators/catalog";
 
 async function getCategories() {
-  return await Axios.get("https://request-automation-api.herokuapp.com/categories/get")
+  return await Axios.get("https://request-automation-api.herokuapp.com/categories/get", {
+    headers: {
+      Authorization: "Bearer " + userLS.get()?.accessToken, 
+    },
+  })
     .then((response) => {
       if (response.status === 200) {
         return response.data;
