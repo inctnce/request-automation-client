@@ -10,6 +10,11 @@
   margin: 8px !important;
 }
 
+.error_color {
+  color: var(--danger-main) !important;
+  /* color: white !important; */
+}
+
 @media screen and (max-width: 600px) {
   .form {
     display: flex;

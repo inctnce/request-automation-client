@@ -1,3 +1,4 @@
+import Product from "../../../types/Product";
 import Specification from "../../../types/Specification";
 
 export function parseSpecs(parse: "specs" | "values", specs: Specification[]): string[] {
@@ -14,39 +15,26 @@ export function parseSpecs(parse: "specs" | "values", specs: Specification[]): s
   return result;
 }
 
-export default function postProduct(
-  name: string,
-  specs: string[],
-  values: string[],
-  price: string,
-  extra_info: string,
-  creator_id: string,
-  category_id: string,
+export default function submit(
+  product: Product,
   request: "post" | "put" | string,
-  post: (
-    name: string,
-    specs: string[],
-    values: string[],
-    price: string,
-    extra_info: string,
-    creator_id: string,
-    category_id: string,
-    request: "post" | "put" | string
-  ) => void
+  post: (product: Product) => void,
+  put: (product: Product) => void,
+  creator_id?: string
 ) {
-  if (name.trim() === "" || name === undefined) {
+  if (product.name.trim() === "" || product.name === undefined) {
     console.log("name error");
     return "error";
   }
-  if (specs.length !== values.length) {
+  if (product.specs.length !== product.settings.length) {
     console.log("specs error");
     return "error";
   }
-  if (price.trim() === "" || price === undefined) {
+  if (product.price.trim() === "" || product.price === undefined) {
     console.log("price error");
     return "error";
   }
-  if (category_id === "" || category_id === undefined) {
+  if (product.category_id === "" || product.category_id === undefined) {
     console.log("category_id error");
     return "error";
   }
@@ -54,5 +42,14 @@ export default function postProduct(
     console.log("creator_id error");
     return "error";
   }
-  post(name, specs, values, price, extra_info, creator_id, category_id, request);
+
+  switch (request) {
+    case "post":
+      product.creator_id = creator_id!;
+      post(product);
+      return;
+    case "put":
+      put(product);
+      return;
+  }
 }

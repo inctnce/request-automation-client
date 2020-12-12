@@ -17,19 +17,16 @@ import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import Add from "@material-ui/icons/Add";
 import Remove from "@material-ui/icons/Remove";
-import Specification from "../../../types/Specification";
-import postProduct, { parseSpecs } from "./helpers";
+import submit from "./helpers";
+import Delete from "@material-ui/icons/Delete";
+import Product from "../../../types/Product";
 
 type Props = {
-  creator_id: string;
-
-  selected_category_id: string;
   categories: Category[];
 
-  name: string;
-  specs: Specification[];
-  price: string;
-  extra_info: string;
+  product: Product;
+  creator_id?: string;
+
   request: "post" | "put" | string;
 
   formTitle: string;
@@ -37,19 +34,12 @@ type Props = {
 
   updNumOfRows: (action: "increase" | "decrease") => void;
 
-  updTable: (type: "spec" | "value", index: number, value: string) => void;
-  updForm: (segment: "category" | "other", key: number, value: string) => void;
+  updTable: (type: "spec" | "setting", index: number, value: string) => void;
+  updForm: (segment: string, key: number, value: string) => void;
 
-  postProduct: (
-    name: string,
-    specs: string[],
-    values: string[],
-    price: string,
-    extra_info: string,
-    creator_id: string,
-    category_id: string,
-    request: "post" | "put" | string
-  ) => void;
+  postProduct?: (product: Product) => void;
+  putProduct?: (product: Product) => void;
+  deleteProduct?: (product_id: string) => void;
 };
 
 const ProductForm = (props: Props) => {
@@ -57,6 +47,7 @@ const ProductForm = (props: Props) => {
 
   React.useEffect(() => {
     if (props.request === "post") {
+      props.updForm("category", 0, props.categories[0].id!);
     }
   }, []);
 
@@ -79,7 +70,7 @@ const ProductForm = (props: Props) => {
   function createSpecsTable() {
     const result = [];
 
-    for (let i = 0; i < props.specs.length; i++) {
+    for (let i = 0; i < props.product.specs.length; i++) {
       const specRef: React.RefObject<HTMLInputElement> = React.createRef();
       const valueRef: React.RefObject<HTMLInputElement> = React.createRef();
       specRefs.push(specRef);
@@ -89,7 +80,7 @@ const ProductForm = (props: Props) => {
           <TableCell>
             <InputBase
               placeholder="характеристика"
-              value={props.specs[i].spec}
+              value={props.product.specs[i]}
               inputRef={specRefs[i]}
               onChange={() => props.updTable("spec", i, specRefs[i].current!.value)}
             />
@@ -97,9 +88,9 @@ const ProductForm = (props: Props) => {
           <TableCell>
             <InputBase
               placeholder="значение"
-              value={props.specs[i].setting}
+              value={props.product.settings[i]}
               inputRef={valueRefs[i]}
-              onChange={() => props.updTable("value", i, valueRefs[i].current!.value)}
+              onChange={() => props.updTable("setting", i, valueRefs[i].current!.value)}
             />
           </TableCell>
         </TableRow>
@@ -130,8 +121,8 @@ const ProductForm = (props: Props) => {
           required
           label="Название"
           inputRef={nameRef}
-          value={props.name}
-          onChange={() => props.updForm("other", 0, nameRef.current!.value)}
+          value={props.product.name}
+          onChange={() => props.updForm("name", 0, nameRef.current!.value)}
         />
 
         <Paper variant="outlined" className={style.item}>
@@ -160,8 +151,8 @@ const ProductForm = (props: Props) => {
           required
           label="Дополнительная информация"
           inputRef={extraInfoRef}
-          value={props.extra_info}
-          onChange={() => props.updForm("other", 1, extraInfoRef.current!.value)}
+          value={props.product.extra_info}
+          onChange={() => props.updForm("extra_info", 0, extraInfoRef.current!.value)}
         />
 
         <TextField
@@ -169,31 +160,33 @@ const ProductForm = (props: Props) => {
           required
           label="Цена"
           inputRef={priceRef}
-          value={props.price}
-          onChange={() => props.updForm("other", 2, priceRef.current!.value)}
+          value={props.product.price}
+          onChange={() => props.updForm("price", 0, priceRef.current!.value)}
         />
 
-        <Button
-          variant="contained"
-          color="primary"
-          className={style.item}
-          disableElevation
-          onClick={() =>
-            postProduct(
-              props.name,
-              parseSpecs("specs", props.specs),
-              parseSpecs("values", props.specs),
-              props.price,
-              props.extra_info,
-              props.creator_id,
-              props.selected_category_id,
-              props.request,
-              props.postProduct
-            )
-          }
-        >
-          {props.submitBtnTitle}
-        </Button>
+        <div>
+          <Button
+            variant="contained"
+            color="primary"
+            className={style.item}
+            disableElevation
+            onClick={() =>
+              submit(props.product, props.request, props.postProduct!, props.putProduct!, props.creator_id)
+            }
+          >
+            {props.submitBtnTitle}
+          </Button>
+          {props.request === "put" ? (
+            <IconButton
+              className={style.item + " " + style.error_color}
+              onClick={() => props.deleteProduct!(props.product.id!)}
+            >
+              <Delete />
+            </IconButton>
+          ) : (
+            <></>
+          )}
+        </div>
       </Paper>
     </div>
   );

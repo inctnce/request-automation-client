@@ -11,9 +11,12 @@ const account: AccountPage = {
 
   product_form: {
     name: "",
-    specs: [{ spec: "", setting: "" }],
+    specs: [""],
+    settings: [""],
     price: "",
     extra_info: "",
+    category_id: "",
+    creator_id: "",
   },
 };
 

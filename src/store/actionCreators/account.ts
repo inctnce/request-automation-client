@@ -1,5 +1,4 @@
 import Action from "../../types/Action";
-import Category from "../../types/Category";
 import ACTION from "../ACTION";
 
 function setOption(selected_option: number): Action {
@@ -9,11 +8,7 @@ function setOption(selected_option: number): Action {
   };
 }
 
-function updProductForm(
-  segment: "category" | "table" | "other",
-  key: number,
-  value: string | Category
-): Action {
+function updProductForm(segment: string, key: number, value: string): Action {
   return {
     type: ACTION.UPD_PRODUCT_FORM,
     payload: {
@@ -24,11 +19,7 @@ function updProductForm(
   };
 }
 
-function updProductFormTable(
-  type: "spec" | "value",
-  index: number,
-  value: string
-): Action {
+function updProductFormTable(type: "spec" | "setting", index: number, value: string): Action {
   return {
     type: ACTION.UPD_PRODUCT_FORM_TABLE,
     payload: {

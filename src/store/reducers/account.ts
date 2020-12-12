@@ -2,9 +2,10 @@ import initialState from "../states/account";
 import Action from "../../types/Action";
 import AccountPage from "../../types/pages/AccountPage";
 import ACTION from "../ACTION";
-import Specification from "../../types/Specification";
 
 function account(state: AccountPage = initialState, action: Action): AccountPage {
+  const specs: string[] = state.product_form.specs;
+  const settings: string[] = state.product_form.settings;
   switch (action.type) {
     case ACTION.SET_OPTION:
       return {
@@ -12,57 +13,52 @@ function account(state: AccountPage = initialState, action: Action): AccountPage
         selected_option: action.payload,
       };
     case ACTION.UPD_NUM_OF_ROWS:
+      if (action.payload === "decrease" && specs.length > 1) {
+        specs.pop();
+        settings.pop();
+      }
+      if (action.payload === "increase") {
+        specs.push("");
+        settings.push("");
+      }
+
       return {
         ...state,
         product_form: {
           ...state.product_form,
-          specs:
-            action.payload === "increase"
-              ? [...state.product_form.specs, { spec: "", setting: "" }]
-              : [...state.product_form.specs.splice(state.product_form.specs.length - 1, 1)],
+          specs: [...specs],
+          settings: [...settings],
         },
       };
+
     case ACTION.UPD_PRODUCT_FORM:
       return {
         ...state,
         product_form: {
           ...state.product_form,
-          selected_category_id:
-            action.payload.segment === "category" ? action.payload.value : state.product_form.selected_category_id,
-          name:
-            action.payload.segment === "other"
-              ? action.payload.key === 0
-                ? action.payload.value
-                : state.product_form.name
-              : state.product_form.name,
-          price:
-            action.payload.segment === "other"
-              ? action.payload.key === 2
-                ? action.payload.value
-                : state.product_form.price
-              : state.product_form.price,
-          extra_info:
-            action.payload.segment === "other"
-              ? action.payload.key === 1
-                ? action.payload.value
-                : state.product_form.extra_info
-              : state.product_form.extra_info,
+          category_id: action.payload.segment === "category" ? action.payload.value : state.product_form.category_id,
+          name: action.payload.segment === "name" ? action.payload.value : state.product_form.name,
+          extra_info: action.payload.segment === "extra_info" ? action.payload.value : state.product_form.extra_info,
+          price: action.payload.segment === "price" ? action.payload.value : state.product_form.price,
         },
       };
-    case ACTION.UPD_PRODUCT_FORM_TABLE:
-      let value: Specification = {
-        spec: state.product_form.specs[action.payload.index].spec,
-        setting: state.product_form.specs[action.payload.index].setting,
-      };
-      action.payload.type === "spec" ? (value.spec = action.payload.value) : (value.setting = action.payload.value);
 
-      state.product_form.specs[action.payload.index] = value;
+    case ACTION.UPD_PRODUCT_FORM_TABLE:
+      console.log(action.payload);
+
+      if (action.payload.type === "spec") {
+        specs[action.payload.index] = action.payload.value;
+      }
+      if (action.payload.type === "setting") {
+        settings[action.payload.index] = action.payload.value;
+      }
 
       return {
         ...state,
         product_form: {
           ...state.product_form,
-          specs: [...state.product_form.specs],
+          specs: [...specs],
+          settings: [...settings],
         },
       };
 

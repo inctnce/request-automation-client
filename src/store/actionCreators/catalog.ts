@@ -21,26 +21,17 @@ function setCategory(category: Category): Action {
   };
 }
 
-function postProduct(
-  name: string,
-  specs: string[],
-  settings: string[],
-  price: string,
-  extra_info: string,
-  creator_id: string,
-  category_id: string
-): Action {
+function postProduct(product: Product): Action {
   return {
     type: ACTION.POST_PRODUCT,
-    payload: {
-      name: name,
-      specs: specs,
-      settings: settings,
-      price: price,
-      extra_info: extra_info,
-      creator_id: creator_id,
-      category_id: category_id,
-    },
+    payload: product,
+  };
+}
+
+function putProduct(product: Product): Action {
+  return {
+    type: ACTION.PUT_PRODUCT,
+    payload: product,
   };
 }
 
@@ -106,15 +97,17 @@ function setDemands(demands: Demand[]): Action {
 }
 
 const catalogAC = {
+  getCategories: getCategories,
+  setCategories: setCategories,
   postCategory: postCategory,
   setCategory: setCategory,
-  postProduct: postProduct,
-  setProduct: setProduct,
-  getCategories: getCategories,
-  getProducts: getProducts,
-  setCategories: setCategories,
-  setProducts: setProducts,
   selectCategory: selectCategory,
+
+  getProducts: getProducts,
+  setProducts: setProducts,
+  postProduct: postProduct,
+  putProduct: putProduct,
+  setProduct: setProduct,
 
   getDemands: getDemands,
   setDemands: setDemands,

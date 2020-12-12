@@ -7,6 +7,7 @@ import CatalogPage from "../../../types/pages/CatalogPage";
 import accountAC from "../../../store/actionCreators/account";
 import AppPage from "../../../types/pages/AppPage";
 import catalogAC from "../../../store/actionCreators/catalog";
+import Product from "../../../types/Product";
 
 function mapStateToProps(
   state: CombinedState<{
@@ -19,13 +20,8 @@ function mapStateToProps(
     creator_id: state.app.user!.id,
     request: "post",
 
-    selected_category_id: state.account.product_form?.selected_category_id!,
     categories: state.catalog.categories,
-
-    name: state.account.product_form.name,
-    specs: state.account.product_form.specs,
-    price: state.account.product_form.price,
-    extra_info: state.account.product_form.extra_info,
+    product: state.account.product_form,
 
     formTitle: "Добавить товар",
     submitBtnTitle: "Добавить",
@@ -34,11 +30,11 @@ function mapStateToProps(
 
 function mapDispatchToProps(dispatch: (action: Action) => void) {
   return {
-    updForm: (segment: "category" | "table" | "other", key: number, value: string) => {
+    updForm: (segment: string, key: number, value: string) => {
       dispatch(accountAC.updProductForm(segment, key, value));
     },
 
-    updTable: (type: "spec" | "value", index: number, value: string) => {
+    updTable: (type: "spec" | "setting", index: number, value: string) => {
       dispatch(accountAC.updProductFormTable(type, index, value));
     },
 
@@ -46,16 +42,8 @@ function mapDispatchToProps(dispatch: (action: Action) => void) {
       dispatch(accountAC.updNumOfRows(action));
     },
 
-    postProduct: (
-      name: string,
-      specs: string[],
-      values: string[],
-      price: string,
-      extra_info: string,
-      creator_id: string,
-      category_id: string
-    ) => {
-      dispatch(catalogAC.postProduct(name, specs, values, price, extra_info, creator_id, category_id));
+    postProduct: (product: Product) => {
+      dispatch(catalogAC.postProduct(product));
     },
   };
 }

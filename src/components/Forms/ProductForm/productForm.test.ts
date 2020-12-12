@@ -1,4 +1,4 @@
-import postProduct from "./helpers";
+import submit from "./helpers";
 
 function funcAlias() {
   return;
@@ -17,7 +17,7 @@ test("add product with invalid name", () => {
   const invalid_name_2: string = " ";
 
   expect(
-    postProduct(
+    submit(
       invalid_name_1,
       specs,
       values,
@@ -30,7 +30,7 @@ test("add product with invalid name", () => {
   ).toBe("error");
 
   expect(
-    postProduct(
+    submit(
       invalid_name_2,
       specs,
       values,
@@ -51,7 +51,7 @@ test("add product with invalid specs and values", () => {
   const invalid_values_1: string[] = ["invalid", "values"];
 
   expect(
-    postProduct(
+    submit(
       name,
       invalid_specs,
       invalid_values,
@@ -64,7 +64,7 @@ test("add product with invalid specs and values", () => {
   ).toBe("error");
 
   expect(
-    postProduct(
+    submit(
       name,
       invalid_specs_1,
       invalid_values_1,
@@ -82,7 +82,7 @@ test("add product with invalid price", () => {
   const invalid_price_2: string = " ";
 
   expect(
-    postProduct(
+    submit(
       name,
       specs,
       values,
@@ -95,7 +95,7 @@ test("add product with invalid price", () => {
   ).toBe("error");
 
   expect(
-    postProduct(
+    submit(
       name,
       specs,
       values,

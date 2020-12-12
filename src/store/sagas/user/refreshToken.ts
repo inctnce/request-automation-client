@@ -5,7 +5,7 @@ import ACTION from "../../ACTION";
 import userLS from "../../../localStorage/user";
 
 async function refreshToken(token: string) {
-  return await Axios.post("https://request-automation-api.herokuapp.com/users/login", token, {
+  return await Axios.post("https://request-automation-api.herokuapp.com/users/token", token, {
     headers: {
       Authorization: "Bearer " + userLS.get()?.accessToken,
     },

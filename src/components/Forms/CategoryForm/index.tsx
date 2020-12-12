@@ -9,7 +9,7 @@ import postCategory from "./helpers";
 import Alert from "../../../types/Alert";
 
 type Props = {
-  creator_id: string;
+  creator_id?: string;
   postCategory: (user_id: string, name: string) => void;
   alert: (alert: Alert) => void;
 };
@@ -30,7 +30,7 @@ const CategoryForm = (props: Props) => {
           variant="contained"
           color="primary"
           disableElevation
-          onClick={() => postCategory(props.creator_id, categoryRef.current!.value, props.postCategory, props.alert)}
+          onClick={() => postCategory(props.creator_id!, categoryRef.current!.value, props.postCategory, props.alert)}
         >
           Добавить
         </Button>

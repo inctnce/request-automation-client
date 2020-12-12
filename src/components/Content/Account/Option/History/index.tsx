@@ -17,6 +17,7 @@ import Alert from "../../../../../types/Alert";
 import ProductForm from "../../../../Forms/ProductForm";
 import DemandForm from "../../../../Forms/DemandForm";
 import Demand from "../../../../../types/Demand";
+import Product from "../../../../../types/Product";
 
 type Props = {
   categories: Category[];
@@ -28,21 +29,12 @@ type Props = {
 
   request: "post" | "put";
 
-  postCategory?: (user_id: string, name: string) => void;
+  putCategory?: (user_id: string, name: string) => void;
 
   updNumOfRows?: (action: "increase" | "decrease") => void;
-  updTable?: (type: "spec" | "value", index: number, value: string) => void;
-  updForm?: (segment: "category" | "other", key: number, value: string | Category) => void;
-  putProduct?: (
-    name: string,
-    specs: string[],
-    values: string[],
-    price: string,
-    extra_info: string,
-    creator_id: string,
-    category_id: string,
-    request: "post" | "put" | string
-  ) => void;
+  updTable?: (type: "spec" | "setting", index: number, value: string) => void;
+  updForm?: (segment: string, key: number, value: string) => void;
+  putProduct?: (product: Product) => void;
 
   postDemand?: (demand: Demand) => void;
   updDemandForm?: (key: number, value: string) => void;
@@ -61,26 +53,23 @@ const History = (props: Props) => {
   function setModalBody(): JSX.Element {
     switch (props.itemsType) {
       case "category":
-        return <CategoryForm creator_id={props.user_id!} postCategory={props.postCategory!} alert={props.alert!} />;
+        return <CategoryForm creator_id={props.user_id!} postCategory={props.putCategory!} alert={props.alert!} />;
+
       case "product":
         return (
           <ProductForm
-            creator_id={props.user_id!}
-            name={props.items[index].name}
             categories={props.categories}
-            selected_category_id={props.items[index].category_id}
-            specs={props.items[index].specs}
-            price={props.items[index].price}
-            extra_info={props.items[index].extra_info}
+            product={props.items[index]}
             request={props.request}
             submitBtnTitle="Обновить"
             formTitle="Обновить товар"
             updNumOfRows={props.updNumOfRows!}
             updTable={props.updTable!}
             updForm={props.updForm!}
-            postProduct={props.putProduct!}
+            putProduct={props.putProduct!}
           />
         );
+
       case "demand":
         return (
           <DemandForm
